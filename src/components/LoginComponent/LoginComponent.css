@@ -1,0 +1,13 @@
+.login_title{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+}
+
+.login_form_container{
+    padding: 30px;
+}
+
+.login_card{
+    border-radius: 30px;
+}

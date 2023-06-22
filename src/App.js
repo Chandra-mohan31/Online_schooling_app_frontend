@@ -1,11 +1,9 @@
-import './App.css';
+import React from 'react'
 
 function App() {
   return (
-    <div className="App">
-      Online Schooling App
-    </div>
-  );
+    <div className='App'>App</div>
+  )
 }
 
-export default App;
+export default App
