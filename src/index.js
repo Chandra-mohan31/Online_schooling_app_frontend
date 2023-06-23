@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RegisterComponent from './components/RegisterComponent/RegisterComponent';
 import LoginComponent from './components/LoginComponent/LoginComponent';
+import Protected from './components/Protected';
 
 
 const router = createBrowserRouter([
   {
     path:"/",
     element:(
-      <App />
+      <Protected>
+        <App />
+      </Protected>
     ),
   },
   {
@@ -24,6 +27,14 @@ const router = createBrowserRouter([
     path:"/register",
     element:(
       <RegisterComponent />
+    )
+  },
+  {
+    path:"/dashboard",
+    element:(
+      <Protected>
+        <div>User dashboard</div>
+      </Protected>
     )
   }
 ])

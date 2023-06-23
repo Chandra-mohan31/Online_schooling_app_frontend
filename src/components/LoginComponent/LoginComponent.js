@@ -1,9 +1,11 @@
-import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, TextField, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { handleLogin } from '../../backend_helper';
 import { Link, useNavigate } from 'react-router-dom';
 import bgImage from "../../images/elearning1.jpg";
+import EmailIcon from '@mui/icons-material/Email';
 import "./LoginComponent.css";
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 function LoginComponent() {
     const navigate = useNavigate();
@@ -20,6 +22,8 @@ function LoginComponent() {
             [name]:value
         });
     }
+
+
   return (
     <div style={{
         padding:"30px",
@@ -70,8 +74,13 @@ function LoginComponent() {
                     value={loginData.email}
                     fullWidth
                     sx={{ mb: 3 }}
-
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><EmailIcon /></InputAdornment>
+                        
+                      }}
+                    
                 />
+                     
                   <TextField
                     label="Password"
                     name='password'
@@ -85,7 +94,12 @@ function LoginComponent() {
                     
                     fullWidth
                     sx={{ mb: 3 }}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><LockOpenIcon /></InputAdornment>
+                        
+                      }}
                 />
+                      
 
 <FormGroup>
   <FormControlLabel control={<Checkbox checked={loginData.rememberme} onChange={()=>{
@@ -99,7 +113,7 @@ function LoginComponent() {
 <Button type='submit' fullWidth color='info' variant='contained' disabled={(loginData.email.length == 0 || loginData.password.length==0)  ? true : false}  onClick={()=>{
     console.log(loginData);
     if(handleLogin({email:loginData.email,password:loginData.password,rememberme:loginData.rememberme})){
-        navigate("/");
+        navigate("/dashboard");
     }
 
 }}>

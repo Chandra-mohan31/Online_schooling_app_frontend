@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, FormControl, Button, FormControlLabel, Checkbox, InputLabel, MenuItem, Select, FormLabel, FormGroup, Container, Box, IconButton, Icon, CircularProgress, Typography } from "@mui/material";
-import { Man, Man2Outlined, Woman, WomanOutlined } from '@mui/icons-material';
+import { TextField, FormControl, Button, FormControlLabel, Checkbox, InputLabel, MenuItem, Select, FormLabel, FormGroup, Container, Box, IconButton, Icon, CircularProgress, Typography, InputAdornment } from "@mui/material";
+import { KeyOutlined, KeyRounded, Man, Man2Outlined, Woman, WomanOutlined } from '@mui/icons-material';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import AWS from "aws-sdk";
 import { Link, useNavigate } from 'react-router-dom';
 import bgImage from "../../images/elearning2.jpg";
+import BadgeIcon from '@mui/icons-material/Badge';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import GroupIcon from '@mui/icons-material/Group';
+import SubjectIcon from '@mui/icons-material/Subject';
+import ClassIcon from '@mui/icons-material/Class';
+
 
 const aws_access_key = process.env.REACT_APP_AWS_ACCESS_KEY;
 const aws_secret_key = process.env.REACT_APP_AWS_SECRET_KEY;
@@ -226,6 +235,10 @@ function RegisterComponent() {
                     value={formData.userName}
                     fullWidth
                     sx={{ mb: 3 }}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><BadgeIcon /></InputAdornment>
+                        
+                      }}
                 />
 
 
@@ -240,6 +253,10 @@ function RegisterComponent() {
                     value={formData.phoneNumber}
                     fullWidth
                     sx={{ mb: 3 }}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><PhoneIcon /></InputAdornment>
+                        
+                      }}
                 />
 
                 <TextField
@@ -253,6 +270,10 @@ function RegisterComponent() {
                     value={formData.email}
                     fullWidth
                     sx={{ mb: 3 }}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><EmailIcon /></InputAdornment>
+                        
+                      }}
 
                 />
 
@@ -338,6 +359,7 @@ function RegisterComponent() {
                     fullWidth
                     sx={{ mb: 3 }}
 
+
                 />
 
                 </Box>
@@ -390,6 +412,10 @@ function RegisterComponent() {
                     helperText="Password must have atleast 1 Uppercase 1 lowercase letter 1 digit and a special char"
                     fullWidth
                     sx={{ mb: 3 }}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><KeyRounded /></InputAdornment>
+                        
+                      }}
                 />
                 <TextField
                     label="repeat password"
@@ -403,6 +429,10 @@ function RegisterComponent() {
                     // error={() => alert("password doesnt match")} // handle this
                     fullWidth
                     sx={{ mb: 3 }}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><KeyOutlined /></InputAdornment>
+                        
+                      }}
                 />
 
                 <FormControl fullWidth sx={{
@@ -415,7 +445,9 @@ function RegisterComponent() {
                         value={formData.userRole}
                         label="Role"
                         name='userRole'
+                        required
                         onChange={handleChange}
+                        
                     >
                         <MenuItem value="teacher">Teacher</MenuItem>
                         <MenuItem value="student">Student</MenuItem>
@@ -435,6 +467,8 @@ function RegisterComponent() {
                      label="class"
                      name='class'
                      onChange={handleChange}
+                     required
+                    
                  >
                      {
                         availableClasses.map(availableClass=>(
@@ -460,6 +494,8 @@ function RegisterComponent() {
                             label="subject"
                             name='subject'
                             onChange={handleChange}
+                            required
+                       
                         >
                             {
                                 availableSubjects.map(availableSubject => (
@@ -477,7 +513,7 @@ function RegisterComponent() {
                     registering ? (
                         <CircularProgress />
                     ):(
-                        <Button variant="contained" color="secondary" type="submit" sx={{
+                        <Button variant="contained" color="primary" type="submit" sx={{
                             width:"50%"
                         }}>Register</Button>
                     )
