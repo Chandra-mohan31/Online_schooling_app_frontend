@@ -3,11 +3,13 @@ import ReactDOM, { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter,Navigate } from 'react-router-dom';
 import RegisterComponent from './components/RegisterComponent/RegisterComponent';
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import Protected from './components/Protected';
-
+import {isLoggedIn} from "./backend_helper/index";
+import NotLoggedIn from './components/NotLoggedIn';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +23,17 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element:(
-      <LoginComponent />
+      <NotLoggedIn>
+        <LoginComponent />
+      </NotLoggedIn>
     )
   },{
     path:"/register",
     element:(
-      <RegisterComponent />
+      <NotLoggedIn>
+        <RegisterComponent />
+
+      </NotLoggedIn>
     )
   },
   {
@@ -35,6 +42,14 @@ const router = createBrowserRouter([
       <Protected>
         <div>User dashboard</div>
       </Protected>
+    )
+  },
+  {
+    path:"/forgotpassword",
+    element:(
+      <NotLoggedIn>
+        <ForgotPassword />
+      </NotLoggedIn>
     )
   }
 ])

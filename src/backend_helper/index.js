@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 
 const baseURL = process.env.REACT_APP_BACKEND;
 
@@ -19,31 +18,31 @@ export const handleLogin = async ({email,password,rememberme}) => {
         });
     
         const data = await response.json();
-    
+        console.log(data);
         if (response.ok) {
           
           const accessToken = data.accessToken;
-          console.log(accessToken);
           localStorage.setItem("accessToken",accessToken);
-          console.log(data.message); 
-          return true; 
+          return {"message":data.message};
         } else {
-          console.log(data.errorMessage); 
-          return false;
+          console.log(data.title); 
+          return {"message":data.title};
         }
       } catch (error) {
-        console.log(error);
-        return false;
+        console.log("error,",error);
+        return {
+          "message":error
+        }
       }
 }
 
 
 export const isLoggedIn = () => {
     const accessToken = localStorage.getItem("accessToken");
+    console.log(accessToken);
     if(accessToken){
-        //get user data using access Token and return
         return accessToken;
     }else{
-        return false;
+      return false;
     }
 }

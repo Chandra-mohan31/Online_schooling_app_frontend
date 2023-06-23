@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, FormControl, Button, FormControlLabel, Checkbox, InputLabel, MenuItem, Select, FormLabel, FormGroup, Container, Box, IconButton, Icon, CircularProgress, Typography, InputAdornment } from "@mui/material";
+import { TextField, FormControl, Button, FormControlLabel, Checkbox, InputLabel, MenuItem, Select, FormLabel, FormGroup, Container, Box, IconButton, Icon, CircularProgress, Typography, InputAdornment, createTheme, styled } from "@mui/material";
 import { KeyOutlined, KeyRounded, Man, Man2Outlined, Woman, WomanOutlined } from '@mui/icons-material';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import AWS from "aws-sdk";
@@ -8,11 +8,9 @@ import bgImage from "../../images/elearning2.jpg";
 import BadgeIcon from '@mui/icons-material/Badge';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
-import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import GroupIcon from '@mui/icons-material/Group';
-import SubjectIcon from '@mui/icons-material/Subject';
-import ClassIcon from '@mui/icons-material/Class';
+import ClearIcon from '@mui/icons-material/Clear';
+import AlertModal from '../AlertModal/AlertModal';
+import { useModal } from '../../utils/useModal';
 
 
 const aws_access_key = process.env.REACT_APP_AWS_ACCESS_KEY;
@@ -44,6 +42,9 @@ function RegisterComponent() {
     const [imageUploading,setImageUploading] = useState(false);
     const baseUrl = process.env.REACT_APP_BACKEND;
     const [image,setImage] = useState();
+    const {openModal,closeModal,open,alertMessage,setAlertMessage,triggerNotification} = useModal();
+    
+
     const navigate = useNavigate();
 
     const getAvailableClassesAndSubjects = () => {
@@ -124,49 +125,61 @@ function RegisterComponent() {
 
                 if (response.ok) {
                     
-                    alert("Registerd successfully!,Please confirm your email..");
+                    triggerNotification("Registerd successfully!,Please confirm your email..");
                     setRegistering(false);
                     navigate("/login");
                   } else {
                     response.json().then((data) => {
                       const errorMessage = data.errorMessage;
                       console.log("Registration error:", errorMessage);
-                      alert( errorMessage);
+                      setRegistering(false);
+                      triggerNotification(errorMessage);
                     });
                 }
 
             })
             .catch(function (error) {
                 console.log(error);
-                alert(error);
+                setRegistering(false);
+                triggerNotification(error);
             });
     }
 
     const submitFormHandler = (e) => {
         e.preventDefault();
         setRegistering(true);
-        if (formData.repeatPassword === formData.password && validatePassword()) {
+        if (validatePassword()) {
+            if(formData.repeatPassword === formData.password ){
+                console.log(formData);
+                registerUser();
+            }else{
+                triggerNotification('passwords dont match!');
+                setRegistering(false);
+            }
 
-
-            console.log(formData);
-            registerUser();
+            
 
 
 
 
         } else {
-            alert('passwords dont match,also do check other details!')
+            triggerNotification('password did not pass the requirements');
+            setRegistering(false);
+
         }
     }
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+    
+
 
     const uploadFileToS3AndGenerateUrl = async () => {
         setImageUploading(true);
         console.log(image);
         const s3 = new AWS.S3();
         if (!image) {
-            alert("please choose an image");
+            triggerNotification("please choose an image");
             return;
           }
           const params = { 
@@ -187,10 +200,14 @@ function RegisterComponent() {
         getAvailableClassesAndSubjects();
     }, [])
 
+
+
+
     return (
         <div style={{
             padding:"30px",
-            backgroundColor:"grey"
+            backgroundColor:"grey",
+            fontFamily:"cursive"
         }}>
 
         <div style={{
@@ -217,7 +234,8 @@ function RegisterComponent() {
             }} alt='elearning_image' />
         </Box>
             <form autoComplete='true' onSubmit={submitFormHandler} style={{
-                margin: "10px"
+                margin: "10px",
+                padding:"20px"
             }}>
                 <h2  style={{
                     textAlign:"center",
@@ -227,10 +245,11 @@ function RegisterComponent() {
                 <TextField
                     label="User Name"
                     name='userName'
+                
                     onChange={handleChange}
                     required
                     variant="standard"
-                    color="secondary"
+                    color="info"
                     type="text"
                     value={formData.userName}
                     fullWidth
@@ -239,6 +258,7 @@ function RegisterComponent() {
                         endAdornment: <InputAdornment position="end"><BadgeIcon /></InputAdornment>
                         
                       }}
+
                 />
 
 
@@ -248,7 +268,7 @@ function RegisterComponent() {
                     onChange={handleChange}
                     required
                     variant="standard"
-                    color="secondary"
+                    color="info"
                     type="text"
                     value={formData.phoneNumber}
                     fullWidth
@@ -280,23 +300,39 @@ function RegisterComponent() {
                 {
                     formData.imageUrl.length > 0 ? (
                         <InputLabel htmlFor="image" sx={{ marginBottom: '2px', display: 'block' }}>
-                    Choosen Profile Image
+                    Chosen Profile Image
                 </InputLabel>
                     ):(
-                        <InputLabel htmlFor="image" sx={{ marginBottom: '2px', display: 'block' }}>
-                    Please choose and upload an image
+                        <InputLabel htmlFor="image" sx={{ marginBottom: '2px', display: 'block',textAlign:"center" }}>
+                    Please choose and upload your image
                 </InputLabel>
                     )
                 }
              {
                 (image != null &&  formData.imageUrl.length > 0) ? (
-                    <Box>
+                    <Box sx={{
+                        display:"flex",
+                        flexDirection:"column",
+                        alignItems:"center",
+
+                        
+
+                    }}>
                     <img src={formData.imageUrl} alt='uploaded_image' style={{
                         height:"100px",
                         width:"100px",
-                        borderRadius:"50%",
                         objectFit:"contain"
                     }} />
+                    <IconButton sx={{
+                        marginLeft:"5px"
+                    }} onClick={()=>{
+                        setImage(null);
+                        setFormData({
+                            ...formData,imageUrl:''
+                        })
+                    }}>
+                        <ClearIcon />
+                    </IconButton>
                 </Box>
                 ):(
                  
@@ -310,9 +346,12 @@ function RegisterComponent() {
     
                         <TextField
                         name="image"
-                        onChange={(e)=>{
-                            setImage(e.target.files[0]);
-                        }} 
+                        inputProps={{
+                            accept: 'image/*',
+                            onChange: (e)=>{
+                                setImage(e.target.files[0]);
+                            },
+                          }}
                         required
                         variant='standard'
                         color='info'
@@ -327,13 +366,15 @@ function RegisterComponent() {
                         imageUploading ? (
                             <CircularProgress color='secondary' />
                         ):(
-                            <Button variant='contained' color='primary' onClick={uploadFileToS3AndGenerateUrl} sx={{
-                                marginLeft:"5px"
-                               }}
-                               startIcon={<FileUploadOutlinedIcon />}
-                               >
-                                Upload
-                               </Button>
+                            
+                                image && (<Button variant='contained' color='primary' onClick={uploadFileToS3AndGenerateUrl} sx={{
+                                    marginLeft:"5px"
+                                   }}
+                                   startIcon={<FileUploadOutlinedIcon />}
+                                   >
+                                    Upload
+                                   </Button>)
+                            
                         )
                        }
                     </Box>
@@ -341,13 +382,14 @@ function RegisterComponent() {
              }
 
                 <Box sx={{
-                    // display:"flex",
-                    // flexDirection:"row",
-                    // alignItems:"center"
+                    display:"flex",
+                    flexDirection:"row",
+                    alignItems:"center",
+                    justifyContent:"space-between"
                 }}>
-                <InputLabel htmlFor="dob" sx={{ marginBottom: '8px', display: 'block' }}>
-                    DOB
-                </InputLabel>
+                <label htmlFor="dob" style={{ marginBottom: '8px', display: 'block' }}>
+                    DOB : 
+                </label>
                 <TextField
                     name='dob'
                     onChange={handleChange}
@@ -355,9 +397,9 @@ function RegisterComponent() {
                     variant="filled"
                     color="secondary"
                     type="date"
+                    
                     value={formData.dob}
-                    fullWidth
-                    sx={{ mb: 3 }}
+                    sx={{ mb: 3,width:"80%" }}
 
 
                 />
@@ -373,11 +415,22 @@ function RegisterComponent() {
 
 
                 <FormControl sx={{ mb: 3 }} component="fieldset" variant="standard">
-                    <FormLabel component="legend">Gender</FormLabel>
+                    
                     <FormGroup sx={{
                         display: "flex",
-                        flexDirection: "row"
+                        flexDirection: "row",
+                        alignItems:"center",
+                        
                     }}>
+                        <label 
+                        style={{
+                            
+                            color:"black",
+                            marginRight:"30px",
+                            textDecoration:"none"
+                        }}
+                        >Gender :</label>
+
                         <FormControlLabel
                             name='gender'
                             control={
@@ -412,10 +465,7 @@ function RegisterComponent() {
                     helperText="Password must have atleast 1 Uppercase 1 lowercase letter 1 digit and a special char"
                     fullWidth
                     sx={{ mb: 3 }}
-                    InputProps={{
-                        endAdornment: <InputAdornment position="end"><KeyRounded /></InputAdornment>
-                        
-                      }}
+                   
                 />
                 <TextField
                     label="repeat password"
@@ -426,13 +476,10 @@ function RegisterComponent() {
                     color="secondary"
                     type="password"
                     value={formData.repeatPassword}
-                    // error={() => alert("password doesnt match")} // handle this
+                    // error={() => triggerNotification("password doesnt match")} // handle this
                     fullWidth
                     sx={{ mb: 3 }}
-                    InputProps={{
-                        endAdornment: <InputAdornment position="end"><KeyOutlined /></InputAdornment>
-                        
-                      }}
+                    
                 />
 
                 <FormControl fullWidth sx={{
@@ -535,6 +582,8 @@ function RegisterComponent() {
                     }} to="/login">Login</Link>
                 </Box>
             </form>
+           
+            <AlertModal closeModal={closeModal} openModal={openModal} open={open} alertMessage={alertMessage} />
         </div>
         </div>
     )

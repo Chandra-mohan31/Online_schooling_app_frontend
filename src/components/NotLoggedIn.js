@@ -2,11 +2,12 @@ import React from 'react'
 import { isLoggedIn } from '../backend_helper'
 import { Navigate } from 'react-router-dom'
 
-function Protected({children}) {
+function NotLoggedIn({children}) {
     if(isLoggedIn() == false){
-        return <Navigate to="/login" />
+        return children;
     }
-    return children;
+    
+    return <Navigate to="/dashboard" replace={false} />
 }
 
-export default Protected
+export default NotLoggedIn
