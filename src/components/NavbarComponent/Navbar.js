@@ -13,11 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CallIcon from '@mui/icons-material/Call';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Logout, getLoggedInUserDetails, isLoggedIn, logoutUser } from '../../backend_helper';
 import SchoolIcon from '@mui/icons-material/School';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
 
 
 
@@ -27,11 +29,9 @@ function NavbarComponent() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const pages =  isLoggedIn()  ? [{title:'Home',routeto:'/'} ,{title:'dashboard',routeto:'/dashboard'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
   const settings = ['Dashboard','Profile', 'Chat', 'Logout'];
-  const [loggedInUser,setLoggedInUser] = useState();
-  const getUserData = async () => {
-    const currUser = await getLoggedInUserDetails();
-    setLoggedInUser(currUser);
-  }
+  const {loggedInUser} = useContext(AuthContext);
+  const location = useLocation();
+ 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -47,7 +47,6 @@ function NavbarComponent() {
     setAnchorElUser(null);
   };
   const navigate = useNavigate();
-
   const handleLogout = () => {
         if(logoutUser()=="logged out successfully!"){
             navigate("/login");
@@ -57,9 +56,7 @@ function NavbarComponent() {
 
 
   }
-  useEffect(()=>{
-    getUserData();
-  },[])
+  
   return (
     <AppBar position="sticky" sx={{
         backgroundColor:'black',
@@ -118,7 +115,7 @@ function NavbarComponent() {
                     handleCloseNavMenu();
                     navigate(`${page.routeto}`)
                 }}>
-                  <Typography textAlign="center" fontFamily="cursive">{page.title}</Typography>
+                  <Typography textAlign="center" color={location.pathname.toString() == page.routeto && 'blueviolet'} fontFamily="cursive">{page.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -154,8 +151,11 @@ function NavbarComponent() {
               >
                 <Typography sx={{
                   textTransform:'none',
-                  fontFamily:"cursive"
-                }}>
+                  fontFamily:"cursive",
+
+                }}
+                color={location.pathname.toString() == page.routeto && 'cyan'}
+                >
                 {page.title}
                 </Typography>
               </Button>

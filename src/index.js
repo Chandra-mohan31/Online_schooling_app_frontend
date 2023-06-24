@@ -11,6 +11,7 @@ import { isLoggedIn } from "./backend_helper/index";
 import NotLoggedIn from './components/NotLoggedIn';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import NavbarComponent from './components/NavbarComponent/Navbar';
+import { GlobalAuthStateProvider } from './context/authContext';
 
 const router = createBrowserRouter([
   {
@@ -66,7 +67,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <GlobalAuthStateProvider>
     <RouterProvider router={router} />
+
+    </GlobalAuthStateProvider>
 
   </React.StrictMode>
 );

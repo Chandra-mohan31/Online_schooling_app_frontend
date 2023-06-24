@@ -72,11 +72,3 @@ export const getLoggedInUserDetails = async () => {
     }
   }
 }
-// found difficulty returning userData straight from here,its goes there as a promise,then i resolve the promise there uing another function and set the userData to a state and manage it,
-//TODO : simplify this logic,try to use the global context
-
-export const testGetUserData = async () => {
-  const currUser = await getLoggedInUserDetails();
-  return currUser;
-  
-}
