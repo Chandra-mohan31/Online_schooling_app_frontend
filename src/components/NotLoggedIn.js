@@ -7,7 +7,7 @@ function NotLoggedIn({children}) {
         return children;
     }
     
-    return <Navigate to="/dashboard" replace={false} />
+    return <Navigate to="/dashboard"  />
 }
 
 export default NotLoggedIn

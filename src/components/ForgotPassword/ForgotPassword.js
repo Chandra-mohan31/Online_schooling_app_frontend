@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 function ForgotPassword() {
     const [passCodeSent,setPassCodeSent] = useState(false);
     const [passCodeValue,setPassCodeValue] = useState("");
+    
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const [repeatPassword,setRepeatPassword] = useState("");
     const baseUrl = process.env.REACT_APP_BACKEND;
 
     const navigate = useNavigate();
@@ -33,9 +33,10 @@ function ForgotPassword() {
             setPassCodeSent(true);
             alert(data.message);
         }else{
-            console.log("failed to send code!");
+            console.log(data); 
+            alert("Failed to send Reset Code!"); 
         }
-        console.log(data);           
+                 
         } catch(err){
             console.log(err);
         }
@@ -61,9 +62,10 @@ function ForgotPassword() {
                 navigate("/login");
                 
             }else{
-                console.log("failed to reset code!");
+                console.log("failed to reset Password!");
+                console.log(data); 
+                alert("Failed to reset Password!,",data.message);
             }
-            console.log(data);           
             } catch(err){
                 console.log(err);
             }
@@ -126,21 +128,8 @@ function ForgotPassword() {
                                 sx={{ mb: 3 }}
                                
                             />
-                            <TextField
-                                label="repeat password"
-                                name='repeatPassword'
-                                onChange={(e)=>setRepeatPassword(e.target.value)}
-                                required
-                                variant="standard"
-                                color="secondary"
-                                type="password"
-                                value={repeatPassword}
-                                // error={() => triggerNotification("password doesnt match")} // handle this
-                                fullWidth
-                                sx={{ mb: 3 }}
-                                
-                            />
-                    <Button variant='contained' color='info' onClick={resetPassword} >Reset Password</Button>
+                        
+                    <Button disabled={password == null || password.length == 0 || passCodeValue == null ||passCodeValue.length == 0} variant='contained' color='info' onClick={resetPassword} >Reset Password</Button>
             
                 </div>
             ):(
@@ -162,13 +151,13 @@ function ForgotPassword() {
                                 value={email}
                                 fullWidth
                                 sx={{ mb: 3 }}
-                            
+
                                 InputProps={{
                                     endAdornment: <InputAdornment position="end"><EmailIcon /></InputAdornment>
                                     
                                   }}
                             />
-                            <Button variant='contained' color='info' onClick={getPasswordResetCode} >Get Code</Button>
+                            <Button variant='contained' color='info' disabled={email.length == 0 || email == null} onClick={getPasswordResetCode} >Get Code</Button>
             
                 </div>
             )

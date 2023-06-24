@@ -3,51 +3,61 @@ import ReactDOM, { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter,Navigate } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
 import RegisterComponent from './components/RegisterComponent/RegisterComponent';
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import Protected from './components/Protected';
-import {isLoggedIn} from "./backend_helper/index";
+import { isLoggedIn } from "./backend_helper/index";
 import NotLoggedIn from './components/NotLoggedIn';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import NavbarComponent from './components/NavbarComponent/Navbar';
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element:(
+    path: "/",
+    element: (
       <Protected>
+        <NavbarComponent />
+
         <App />
       </Protected>
     ),
   },
   {
-    path:"/login",
-    element:(
+    path: "/login",
+    element: (
       <NotLoggedIn>
+        <NavbarComponent />
+
         <LoginComponent />
       </NotLoggedIn>
     )
-  },{
-    path:"/register",
-    element:(
+  }, {
+    path: "/register",
+    element: (
       <NotLoggedIn>
+        <NavbarComponent />
         <RegisterComponent />
 
       </NotLoggedIn>
     )
   },
   {
-    path:"/dashboard",
-    element:(
+    path: "/dashboard",
+    element: (
       <Protected>
+        <NavbarComponent />
+
         <div>User dashboard</div>
       </Protected>
     )
   },
   {
-    path:"/forgotpassword",
-    element:(
+    path: "/forgotpassword",
+    element: (
       <NotLoggedIn>
+        <NavbarComponent />
+
         <ForgotPassword />
       </NotLoggedIn>
     )
@@ -56,7 +66,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-        <RouterProvider router={router} />
+    <RouterProvider router={router} />
 
   </React.StrictMode>
 );
