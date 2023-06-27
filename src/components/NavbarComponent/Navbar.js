@@ -29,7 +29,7 @@ function NavbarComponent() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const pages =  isLoggedIn()  ? [{title:'Home',routeto:'/'} ,{title:'dashboard',routeto:'/dashboard'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
   const settings = ['Dashboard','Profile', 'Chat', 'Logout'];
-  const {loggedInUser} = useContext(AuthContext);
+  const {loggedInUser,invokeStateUpdate} = useContext(AuthContext);
   const location = useLocation();
  
   const handleOpenNavMenu = (event) => {
@@ -49,6 +49,7 @@ function NavbarComponent() {
   const navigate = useNavigate();
   const handleLogout = () => {
         if(logoutUser()=="logged out successfully!"){
+          invokeStateUpdate(false);
             navigate("/login");
         }else{
             alert("logout failed!");
@@ -162,12 +163,12 @@ function NavbarComponent() {
             ))}
           </Box>
                 {
-                    isLoggedIn() && (
+                    isLoggedIn() ? (
                         
           <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,marginLeft:5}}>
-              {loggedInUser && <Avatar alt="Remy Sharp" src={loggedInUser.imageUrl} />}
+              {loggedInUser && <Avatar alt="Remy Sharp" src={loggedInUser.imageUrl ? loggedInUser.imageUrl : ""} />}
             </IconButton>
           </Tooltip>
           <Menu
@@ -197,7 +198,7 @@ function NavbarComponent() {
             ))}
           </Menu>
         </Box>
-                    )
+                    ):null
                 }
         </Toolbar>
       </Container>

@@ -22,7 +22,9 @@ export const handleLogin = async ({email,password,rememberme}) => {
         if (response.ok) {
           
           const accessToken = data.accessToken;
+          const role = data.role;
           localStorage.setItem("accessToken",accessToken);
+          //TODO: storage the role logic 
           return {"message":data.message};
         } else {
           console.log(data.title); 
@@ -65,10 +67,94 @@ export const getLoggedInUserDetails = async () => {
       const accessToken = localStorage.getItem("accessToken");
       const response = await fetch(`${baseURL}/api/Authentication/user-details?accessToken=${accessToken}`);
       const data = await response.json();
-      return data?.currUser;
+      return {
+        ...data?.currUser,
+        role:data?.role
+      };
     } catch (error) {
       console.log(error);
       return null;
     }
   }
 }
+
+export const getAllClasses = async () => {
+  if(!isLoggedIn()){
+    console.log("Error - user not logged in!");
+    return;
+  }
+  try{
+    const response = await fetch(`${baseURL}/api/TimeTables/getAllClasses`);
+    const data = await response.json();
+
+    if(response.ok){
+      return data;
+    }else{
+      return {
+        "message":"failed!"
+      }
+    }
+  }catch(err){
+    console.log(err);
+    return {
+      "message":err
+    }
+  }
+
+}
+
+
+export const getAllSessions = async () => {
+  if(!isLoggedIn()){
+    console.log("Error - user not logged in!");
+    return;
+  }
+  try{
+    const response = await fetch(`${baseURL}/api/TimeTables/getAllSessions`);
+    const data = await response.json();
+
+    if(response.ok){
+      return data;
+    }else{
+      return {
+        "message":"failed!"
+      }
+    }
+  }catch(err){
+    console.log(err);
+    return {
+      "message":err
+    }
+  }
+
+}
+
+
+export const getSessionDetails = async (day,session,className) => {
+  if(!isLoggedIn()){
+    console.log("Error - user not logged in!");
+    return;
+  }
+  try{
+    console.log(day);
+    const response = await fetch(`${baseURL}/api/TimeTables/getSessionDetails?day=${day}&className=${className}&session=${session}`);
+    const data = await response.json();
+    console.log(data);
+    if(response.ok){
+      return data;
+    }else{
+      return {
+        "message":"failed!"
+      }
+    }
+  }catch(err){
+    console.log(err);
+    return {
+      "message":err
+    }
+  }
+
+};
+
+
+

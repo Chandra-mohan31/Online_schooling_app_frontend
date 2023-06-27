@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, CircularProgress, Container, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { handleLogin, isLoggedIn } from '../../backend_helper';
 import { Link, useNavigate } from 'react-router-dom';
 import bgImage from "../../images/elearning1.jpg";
@@ -8,6 +8,7 @@ import "./LoginComponent.css";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useModal } from '../../utils/useModal';
 import AlertModal from '../AlertModal/AlertModal';
+import { AuthContext } from '../../context/authContext';
 
 function LoginComponent() {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ function LoginComponent() {
     }
 
     const {open,alertMessage,setAlertMessage,closeModal,openModal,triggerNotification} = useModal();
-
+    const {invokeStateUpdate} = useContext(AuthContext);
 
   return (
     <div style={{
@@ -130,6 +131,7 @@ function LoginComponent() {
                   console.log(data);
                   if(data.message == "Logged In successfully!"){
                       setLoggingIn(false);
+                      invokeStateUpdate(true);
                       navigate("/dashboard");
                   }else{
                       setLoggingIn(false);

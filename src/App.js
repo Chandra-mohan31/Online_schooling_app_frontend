@@ -5,7 +5,7 @@ function App() {
   //test 
   const {loggedInUser} = useContext(AuthContext);
   return (
-    <div className='App'>{loggedInUser && loggedInUser.email}</div>
+    <div className='App'>{loggedInUser ? loggedInUser.email : null}</div>
   )
 }
 

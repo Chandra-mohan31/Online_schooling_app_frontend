@@ -12,6 +12,7 @@ import NotLoggedIn from './components/NotLoggedIn';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import NavbarComponent from './components/NavbarComponent/Navbar';
 import { GlobalAuthStateProvider } from './context/authContext';
+import DashBoardMain from './components/DashboardComponents/DashBoardMain';
 
 const router = createBrowserRouter([
   {
@@ -48,8 +49,7 @@ const router = createBrowserRouter([
     element: (
       <Protected>
         <NavbarComponent />
-
-        <div>User dashboard</div>
+        <DashBoardMain />
       </Protected>
     )
   },

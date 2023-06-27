@@ -9,18 +9,28 @@ export const AuthContext = createContext();
 
 
 export const GlobalAuthStateProvider = ({children}) => {
+    const [isSignedIn,setIsSignedIn] = useState(false);
     const [loggedInUser,setLoggedInUser] = useState();
     const getUserDataIfExists = async () => {
             const user = await getLoggedInUserDetails();
+            if(user != null){
             setLoggedInUser(user);
+            setIsSignedIn(true);
+            }
+    }
+
+    const invokeStateUpdate = (value) => {
+        setIsSignedIn(value);
     }
     useEffect(()=>{
         getUserDataIfExists();
-    },[]);
+    },[isSignedIn]);
 
     const globalStateContext = {
         
-        loggedInUser
+        loggedInUser,
+        isSignedIn,
+        invokeStateUpdate
     }
 
     return (
