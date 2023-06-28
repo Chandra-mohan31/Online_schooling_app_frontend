@@ -97,3 +97,17 @@ export const getTimeTableHelper = async () => {
 
   }
   }
+
+
+  export const getStudentClass = async (userId) =>{
+    try{
+        const response = await fetch(`${baseURL}/api/StudentClasses/getStudentBelongingClass?userId=${userId}`);
+        const data = response.json();
+        console.log(data);
+        if(response.ok){
+            return data;
+        }
+    }catch(err){
+        console.log(err);
+    }
+  };

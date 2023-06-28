@@ -1,27 +1,43 @@
 import React, { useContext, useEffect, useState } from 'react'
 import TableComponent from '../TableComponent/TableComponent'
-import { getTimeTableHelper } from '../../backend_helper/timetablehelper';
+import { getStudentClass, getTimeTableHelper } from '../../backend_helper/timetablehelper';
 import { AuthContext } from '../../context/authContext';
 
 function StudentDashBoard() {
   const {isSignedIn,loggedInUser} = useContext(AuthContext);
   const [studentTimeTable,setStudentTimeTable] = useState([]);
-  var classNameOfLoggedInUser = 'Class-A';
+  const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
   const getStudentTimeTable = async () => {
     const data = await getTimeTableHelper();
     const timeTableGot = await data.timeTable;
-    timeTableGot.find(t => t.forClass == classNameOfLoggedInUser)
-    setStudentTimeTable(timeTableGot);
-
+    const studentClassResponse = await getStudentClass(loggedInUser.id);
+    console.log(studentClassResponse.studentClass.className);
+      
+    setStudentTimeTable(timeTableGot.filter(t => t.forClass === studentClassResponse.studentClass.className));
+    
 }
+
   useEffect(()=>{
-    console.log(loggedInUser.id);//with id get the class of user
-  },[JSON.stringify(studentTimeTable)]);
+    if(loggedInUser){
+      getStudentTimeTable();
+    }
+    
+    
+  },[]);
   return (
     <div>
 
-      <TableComponent />
-      {/* map through days and pass the values as props to the table component and render the component  */}
+     <div className='student_timetable' style={{
+      margin:"30px"
+     }}>
+     {
+        DAYS.map(day=>(
+          <TableComponent day={day} content={studentTimeTable.filter(t => t.day === day).sort((a, b) => a.hour.localeCompare(b.hour))} teacher={false} />
+        ))
+      }
+     </div>
+     
+      
     </div>
   )
 }
