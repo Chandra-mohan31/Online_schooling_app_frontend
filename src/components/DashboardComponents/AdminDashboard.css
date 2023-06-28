@@ -1,19 +1,23 @@
 .day_details_container{
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 10px; */
+
 }
 
-.class_timetable{
-    margin: 10px;
+.class_timetable_item{
+    
     padding: 5px;
+   
+    width: 100%;
+   
+    margin: 5px;
 }
-.class_timetable > div{
+.timetable_inner_item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 50px;
-    width: 150px;
+    width: 205px;
+   
+    padding: 5px;
 }
 
 
@@ -21,4 +25,17 @@
     color: darkviolet;
     font-family: cursive;
 
+}
+
+.class_timetable_wrapper{
+    /* border: 1px solid lightblue; */
+    background-color: whitesmoke;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.timetable_inner_item1 {
+    background-color: white;
+    box-shadow: 1px 1px 2px grey;
+    border-radius: 10px;
 }
