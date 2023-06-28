@@ -1,13 +1,24 @@
 .day_details_container{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    padding: 10px; */
 }
 
 .class_timetable{
     margin: 10px;
     padding: 5px;
 }
+.class_timetable > div{
+    height: 50px;
+    width: 150px;
+}
 
+
+.session_details_caption{
+    color: darkviolet;
+    font-family: cursive;
+
+}

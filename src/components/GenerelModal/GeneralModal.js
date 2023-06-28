@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import ClearIcon from '@mui/icons-material/Clear';
+import { IconButton } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -33,9 +35,13 @@ export default function GeneralModal({closeModal,open,children}) {
             alignItems:"center",
             justifyContent:"center"
           }}>
-          
+          <IconButton onClick={closeModal} sx={{
+            alignSelf:"flex-end"
+          }}>
+            <ClearIcon />
+          </IconButton>
            {children}
-            <Button onClick={closeModal} variant='outlined' color='warning' sx={{mt:2}}>Close</Button>
+            
             </Box>
         </Box>
       </Modal>

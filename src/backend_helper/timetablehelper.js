@@ -50,11 +50,50 @@ export const getTimeTableHelper = async () => {
             body: JSON.stringify(requestBody)
           });
         const data = response.json();
-        alert("time table updated successfully!");
-        console.log(data);
+        
+        
     }catch(err){
         console.log(err);
         alert("failed!");
 
     }
+  }
+
+
+  export const deleteTimeTable = async (id) => {
+    try{
+      const response = await fetch(`${baseURL}/api/TimeTables/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      const data = response.json();
+      
+      console.log(data);
+  }catch(err){
+      console.log(err);
+      alert("failed!");
+
+  }
+  }
+
+
+  
+  export const clearTimeTable = async () => {
+    try{
+      const response = await fetch(`${baseURL}/api/TimeTables/deleteAll`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      const data = response.json();
+      
+      
+  }catch(err){
+      console.log(err);
+      alert("failed!");
+
+  }
   }
