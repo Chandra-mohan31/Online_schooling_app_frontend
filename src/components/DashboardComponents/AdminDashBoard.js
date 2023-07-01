@@ -50,7 +50,7 @@ const invokeStateUpdate = () => {
 }
 
 const generateRandomGibberish = () => {
-    const letters = 'abcdefghijklmnopqrstuvwxyz';
+    const letters = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP';
     let gibberish = '';
   
     for (let i = 0; i < 5; i++) {

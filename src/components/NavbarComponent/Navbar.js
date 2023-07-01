@@ -20,6 +20,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
+import { Link } from 'react-router-dom';
+import { Person } from '@mui/icons-material';
 
 
 
@@ -27,8 +29,8 @@ import { AuthContext } from '../../context/authContext';
 function NavbarComponent() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const pages =  isLoggedIn()  ? [{title:'Home',routeto:'/'} ,{title:'dashboard',routeto:'/dashboard'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
-  const settings = ['Dashboard','Profile', 'Chat', 'Logout'];
+  const pages =  isLoggedIn()  ? [{title:'dashboard',routeto:'/dashboard'},{title:'courses',routeto:'/courses'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
+  const settings = [{title: 'Dashboard',routeto:'/dashboard'},{ title:'Profile',routeto:'/profile',icon:<Person />}, {title:'Logout'}];
   const {loggedInUser,invokeStateUpdate} = useContext(AuthContext);
   const location = useLocation();
  
@@ -166,10 +168,19 @@ function NavbarComponent() {
                     isLoggedIn() ? (
                         
           <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
+            
+          <Tooltip title={`${loggedInUser && loggedInUser.userName}`}>
+          <Box sx={{
+            display:'flex',
+            flexDirection:'row',
+            alignItems:'center',
+            justifyContent:'center'
+          }}>
+            {/* <Typography variant='body1'>{loggedInUser && loggedInUser.userName}</Typography> */}
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,marginLeft:5}}>
               {loggedInUser && <Avatar alt="Remy Sharp" src={loggedInUser.imageUrl ? loggedInUser.imageUrl : ""} />}
             </IconButton>
+          </Box>
           </Tooltip>
           <Menu
             sx={{ mt: '45px' }}
@@ -188,11 +199,24 @@ function NavbarComponent() {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                {setting === 'Logout' ? (
-                    <Button onClick={handleLogout}  variant='outlined' color='secondary'><Typography textAlign="center">{setting}</Typography></Button>
+              <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                {setting.title === 'Logout' ? (
+                    <Button onClick={handleLogout}  variant='outlined' color='secondary'><Typography textAlign="center">{setting.title}</Typography></Button>
                 ):(
-                    <Typography textAlign="center" fontFamily="cursive">{setting}</Typography>
+                    
+                      <Link style={{
+                      textDecoration:'none',
+                      display:'flex',
+                      flexDirection:'row',
+                      justifyContent:'space-between',
+                      alignItems:'center'
+                    }} to={setting.routeto}>
+                      {
+                        setting.icon && <IconButton>
+                          {setting.icon}
+                        </IconButton>
+                      }
+                      <Typography textAlign="center" fontFamily="cursive">{setting.title}</Typography></Link>
                 )}
               </MenuItem>
             ))}

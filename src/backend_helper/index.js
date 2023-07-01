@@ -104,6 +104,20 @@ export const getAllClasses = async () => {
 }
 
 
+
+export const getUserDetails = async () => {
+  const res = await fetch(`${baseURL}/api/UserManager`);
+
+  const data  = res.json();
+  if(res.ok){
+    return data;
+  }else{
+    console.log('failed');
+  }
+
+  
+}
+
 export const getAllSessions = async () => {
   if(!isLoggedIn()){
     console.log("Error - user not logged in!");
@@ -158,3 +172,27 @@ export const getSessionDetails = async (day,session,className) => {
 
 
 
+export const editUserProfile = async (userId, updatedUserProfile) => {
+
+    try {
+      const response = await fetch(`${baseURL}/api/UserManager/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedUserProfile)
+      });
+  
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        return {"message":data.message};
+      }else{
+        console.log("something went wrong");
+        return;
+      }
+    } catch (error) {
+      console.log("error,",error);
+      return;
+    }
+}

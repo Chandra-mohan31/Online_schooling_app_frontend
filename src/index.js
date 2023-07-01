@@ -13,7 +13,9 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import NavbarComponent from './components/NavbarComponent/Navbar';
 import { GlobalAuthStateProvider } from './context/authContext';
 import DashBoardMain from './components/DashboardComponents/DashBoardMain';
-
+import MeetingComponent from './components/MeetingComponent/MeetingComponent';
+import ProfileComponent from './components/ProfileComponent/ProfileComponent';
+import {Box} from "@mui/material";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +23,19 @@ const router = createBrowserRouter([
       <Protected>
         <NavbarComponent />
 
-        <App />
+        <Navigate to="/dashboard" />
+      </Protected>
+    ),
+  },
+  {
+    path: "/courses",
+    element: (
+      <Protected>
+        <NavbarComponent />
+
+        <div>
+          Courses
+        </div>
       </Protected>
     ),
   },
@@ -54,6 +68,17 @@ const router = createBrowserRouter([
     )
   },
   {
+    path: "/profile",
+    element: (
+      <Protected>
+      
+      
+        <NavbarComponent />
+        <ProfileComponent />
+      </Protected>
+    )
+  },
+  {
     path: "/forgotpassword",
     element: (
       <NotLoggedIn>
@@ -61,6 +86,27 @@ const router = createBrowserRouter([
 
         <ForgotPassword />
       </NotLoggedIn>
+    )
+  },
+  {
+    path: "/customerSupport",
+    element: (
+      <NotLoggedIn>
+        <NavbarComponent />
+
+        <div>
+          Customer Support
+        </div>
+      </NotLoggedIn>
+    )
+  },
+  {
+    path:"/joinClass/:roomID",
+    element:(
+      <Protected>
+      <MeetingComponent />
+
+      </Protected>
     )
   }
 ])

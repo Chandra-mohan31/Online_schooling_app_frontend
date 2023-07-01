@@ -7,6 +7,22 @@ function StudentDashBoard() {
   const {isSignedIn,loggedInUser} = useContext(AuthContext);
   const [studentTimeTable,setStudentTimeTable] = useState([]);
   const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const [stateUpdateVal,setStateUpdateVal] = useState(false);
+
+  const stateUpdateValFunc = () => {
+    setStateUpdateVal(!stateUpdateVal);
+  }
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+
+  DAYS.sort((a, b) => {
+    if (a === today) {
+      return -1; // Today comes first
+    } else if (b === today) {
+      return 1; // Today comes first
+    } else {
+      return DAYS.indexOf(a) - DAYS.indexOf(b); // Sort based on the original order
+    }
+  });
   const getStudentTimeTable = async () => {
     const data = await getTimeTableHelper();
     const timeTableGot = await data.timeTable;
@@ -23,7 +39,8 @@ function StudentDashBoard() {
     }
     
     
-  },[]);
+    
+  },[stateUpdateVal]);
   return (
     <div>
 
@@ -32,7 +49,7 @@ function StudentDashBoard() {
      }}>
      {
         DAYS.map(day=>(
-          <TableComponent day={day} content={studentTimeTable.filter(t => t.day === day).sort((a, b) => a.hour.localeCompare(b.hour))} teacher={false} />
+          <TableComponent day={day} content={studentTimeTable.filter(t => t.day === day).sort((a, b) => a.hour.localeCompare(b.hour))} teacher={false} stateUpdateValFunc={stateUpdateValFunc} />
         ))
       }
      </div>
