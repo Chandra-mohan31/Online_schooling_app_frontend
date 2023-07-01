@@ -28,7 +28,7 @@ export const GlobalAuthStateProvider = ({children}) => {
     }
     useEffect(()=>{
         getUserDataIfExists();
-    },[isSignedIn,inStUpdate]);
+    },[isSignedIn,invSt]);
 
     const globalStateContext = {
         

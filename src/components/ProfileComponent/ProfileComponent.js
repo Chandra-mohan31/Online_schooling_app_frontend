@@ -267,7 +267,11 @@ function ProfileComponent() {
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        margin: '20px'
+                        margin: '20px',
+                        backgroundColor:'whitesmoke',
+                        padding:'10px',
+                        boxShadow:'1px 1px 2px 2px lightgrey',
+                        borderRadius:'10px'
                     }}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Gender</InputLabel>
