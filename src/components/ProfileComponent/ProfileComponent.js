@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Typography, Box, Container, Button, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { Card, CardContent, Avatar, Grid, TextField, InputAdornment } from '@mui/material';
 import styled from '@emotion/styled';
@@ -10,8 +10,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 
 import BadgeIcon from '@mui/icons-material/Badge';
-import { editUserProfile, logoutUser } from '../../backend_helper';
+import { editUserProfile, getHandlingSubjects, logoutUser } from '../../backend_helper';
 import { s3UploadUrl } from '../../backend_helper/imageuploadhelper';
+import { getStudentClass } from '../../backend_helper/timetablehelper';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     backgroundColor: 'whitesmoke',
@@ -29,7 +30,20 @@ function ProfileComponent() {
         gender: ''
     });
 
-
+    const [studentClass,setStudentClass] = useState();
+    const [handlingSub,setHandlingSub] = useState();
+    const getStudentBelongingClass = async () => {
+    const studentClassResponse = await getStudentClass(loggedInUser?.id);
+    console.log(studentClassResponse.studentClass.className);
+    setStudentClass(studentClassResponse.studentClass.className);
+    
+    }
+    const handlingSubject = async () => {
+        const subject = await getHandlingSubjects(loggedInUser?.id);
+        console.log(subject);
+        setHandlingSub(subject?.subject);
+    }
+    
 
     const [imageChanging,setImageChanging] = useState(false);
     const handleUserDetailsChange = (event) => {
@@ -87,6 +101,17 @@ function ProfileComponent() {
         }
         setImageChanging(false);
     }
+  
+        if(loggedInUser){
+            if(loggedInUser.role == "Student"){
+                getStudentBelongingClass();
+            }else if(loggedInUser.role == "Teacher"){
+                handlingSubject();
+            }
+           
+        }
+
+ 
 
     return (
         <Box sx={{
@@ -100,9 +125,11 @@ function ProfileComponent() {
             <Box sx={{
 
                 width: '90%',
-                border: '1px solid black',
+                // border: '1px solid black',
+                backgroundColor:'#F5F5F5',
                 display: 'flex',
                 flexDirection: 'column',
+                boxShadow:'-1px 1px 3px 1px lightgrey'
 
             }}>
 
@@ -153,7 +180,8 @@ function ProfileComponent() {
 
 
                     <Box sx={{
-                        flexBasis: '50%'
+                        flexBasis: '50%',
+                        margin:'10px'
                     }}>
                         {
                             loggedInUser && (
@@ -273,7 +301,9 @@ function ProfileComponent() {
                         boxShadow:'1px 1px 2px 2px lightgrey',
                         borderRadius:'10px'
                     }}>
-                        <FormControl fullWidth>
+                        <FormControl fullWidth sx={{
+                            margin:'10px'
+                        }}>
                             <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -289,9 +319,30 @@ function ProfileComponent() {
                             </Select>
                         </FormControl>
 
-                        <Typography variant='body1'>Your Role : <span style={{ color: 'violet' }}>{loggedInUser?.role}</span></Typography>
+                        <Typography sx={{
+                            margin:'10px'
+                        }} variant='body1'>Your Role : <span style={{ color: 'violet' }}>{loggedInUser?.role}</span></Typography>
+                        
+                        {
+                            (loggedInUser?.role =='Student' && studentClass) && (
+                                <Typography sx={{
+                                    margin:'10px'
+                                }} variant='body1'>Your Class : <span style={{ color: 'violet' }}>{studentClass}</span></Typography>
+                            )
+                        
+                    }
 
-                        <Button variant='outlined' color='secondary' onClick={() => {
+                    {
+                      (loggedInUser?.role =='Teacher' && handlingSub) && (
+                        <Typography sx={{
+                            margin:'10px'
+                        }} variant='body1'>Your Subject : <span style={{ color: 'violet' }}>{handlingSub}</span></Typography>
+                    )  
+                    }
+
+                        <Button sx={{
+                            margin:'10px'
+                        }} variant='outlined' color='secondary' onClick={() => {
                             console.log("logic for changing password!");
                             // navigate("/forgotpassword")
                         }}>Click to reset password</Button>

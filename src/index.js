@@ -16,6 +16,7 @@ import DashBoardMain from './components/DashboardComponents/DashBoardMain';
 import MeetingComponent from './components/MeetingComponent/MeetingComponent';
 import ProfileComponent from './components/ProfileComponent/ProfileComponent';
 import {Box} from "@mui/material";
+import StudyMaterialMain from './components/StudyMaterials/StudyMaterialMain';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +76,17 @@ const router = createBrowserRouter([
       
         <NavbarComponent />
         <ProfileComponent />
+      </Protected>
+    )
+  },
+  {
+    path: "/studymaterials",
+    element: (
+      <Protected>
+      
+      
+        <NavbarComponent />
+        <StudyMaterialMain />
       </Protected>
     )
   },

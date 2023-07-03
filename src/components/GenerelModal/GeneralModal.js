@@ -14,9 +14,9 @@ const style = {
     width: 400,
     bgcolor: 'white',
     p: 4,
-    border: '1px solid black',
+    // border: '1px solid white',
     boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
-    borderRadius: '8px',
+    borderRadius: '15px',
 };
 
 export default function GeneralModal({closeModal,open,children}) {

@@ -34,3 +34,27 @@ AWS.config.update({
       return Location;
 
 }
+
+
+export const fileUploadHelper = async (file) => {
+    
+  console.log(file);
+  const s3 = new AWS.S3();
+  if (!file) {
+      alert("please choose a file");
+      return;
+    }
+    const params = { 
+      Bucket: 'onlineschool-files', 
+      Key: `${Date.now()}.${file.name}`, 
+      Body: file,
+      ContentType: file.type
+    };
+    const { Location } = await s3.upload(params).promise();
+    
+
+    
+    console.log('uploaded to s3', Location);
+    return Location;
+
+}

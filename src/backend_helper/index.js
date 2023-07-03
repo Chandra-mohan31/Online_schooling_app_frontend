@@ -196,3 +196,19 @@ export const editUserProfile = async (userId, updatedUserProfile) => {
       return;
     }
 }
+
+
+export const getHandlingSubjects = async (teacherId) => {
+  const res = await fetch(`${baseURL}/handlingSubject/${teacherId}`);
+
+  const data  = await res.json();
+
+  console.log(data);
+  if(res.ok){
+    return data?.teacherSubject;
+  }else{
+    console.log('failed');
+  }
+
+  
+}
