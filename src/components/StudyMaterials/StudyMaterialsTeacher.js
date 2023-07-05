@@ -231,7 +231,10 @@ function StudyMaterialsTeacher() {
             </Box>
 
             <GeneralModal open={open} closeModal={closeModal}>
-                <Box>
+                <Box sx={{
+                    padding:'10px',
+                    margin:'20px'
+                }}>
                     <Typography variant='body1' color='InfoText' sx={{
                         mb: 3
                     }}>Upload Study Material</Typography>

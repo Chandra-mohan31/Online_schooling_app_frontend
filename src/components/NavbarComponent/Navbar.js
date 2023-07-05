@@ -178,7 +178,7 @@ function NavbarComponent() {
           }}>
             {/* <Typography variant='body1'>{loggedInUser && loggedInUser.userName}</Typography> */}
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,marginLeft:5}}>
-              {loggedInUser && <Avatar alt="Remy Sharp" src={loggedInUser.imageUrl ? loggedInUser.imageUrl : ""} />}
+              {loggedInUser && <Avatar alt={loggedInUser?.userName} src={loggedInUser.imageUrl ? loggedInUser.imageUrl : ""} />}
             </IconButton>
           </Box>
           </Tooltip>
