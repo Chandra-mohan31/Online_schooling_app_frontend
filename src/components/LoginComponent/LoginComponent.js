@@ -33,7 +33,7 @@ function LoginComponent() {
   return (
     <div style={{
         padding:"30px",
-        backgroundColor:"grey",
+        backgroundColor:"white",
         height:"100vh",
         margin:0,
         fontFamily:"cursive",

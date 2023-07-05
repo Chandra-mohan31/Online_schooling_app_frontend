@@ -207,7 +207,7 @@ function RegisterComponent() {
     return (
         <div style={{
             padding:"30px",
-            backgroundColor:"grey",
+            backgroundColor:"white",
             fontFamily:"cursive"
         }}>
 

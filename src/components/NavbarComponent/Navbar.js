@@ -29,7 +29,7 @@ import { Person } from '@mui/icons-material';
 function NavbarComponent() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const pages =  isLoggedIn()  ? [{title:'dashboard',routeto:'/dashboard'},{title:'courses',routeto:'/courses'},{title:'studymaterials',routeto:'/studymaterials'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
+  const pages =  isLoggedIn()  ? [{title:'dashboard',routeto:'/dashboard'},{title:'courses',routeto:'/courses'},{title:'studymaterials',routeto:'/studymaterials'},{title:'assignments',routeto:'/assignments'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
   const settings = [{title: 'Dashboard',routeto:'/dashboard'},{ title:'Profile',routeto:'/profile',icon:<Person />}, {title:'Logout'}];
   const {loggedInUser,invokeStateUpdate} = useContext(AuthContext);
   const location = useLocation();
@@ -62,7 +62,7 @@ function NavbarComponent() {
   
   return (
     <AppBar position="sticky" sx={{
-        backgroundColor:'black',
+        backgroundColor:'#1F6E8C',
         
     }}>
       <Container maxWidth="xl">

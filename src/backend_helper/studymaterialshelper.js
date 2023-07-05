@@ -19,3 +19,69 @@ export const postStudyMaterial = async (requestBody) => {
 
     }
   }
+
+
+  export const getPostedMaterialsTeacher = async (teacherId) =>{
+    try{
+        const response = await fetch(`${baseURL}/api/ClassMaterials/postedMaterialsByTeacher/${teacherId}`);
+        const data = response.json();
+        
+        if(response.ok){
+            return data;
+        }
+    }catch(err){
+        console.log(err);
+    }
+  };
+
+
+
+
+
+  export const deleteMaterial = async (materialId) => {
+    try {
+      const response = await fetch(`${baseURL}/api/ClassMaterials/${materialId}`,{
+        method:'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      if(response.ok){
+        console.log(data);
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+
+
+
+  export const getMaterialsOfClass = async (className) => {
+    try{
+      const response = await fetch(`${baseURL}/api/ClassMaterials/classStudyMaterials/${className}`);
+      const data = await response.json();
+      
+      if(response.ok){
+          return data;
+      }
+  }catch(err){
+      console.log(err);
+  }
+}
+
+
+
+export const getMaterialInfo = async (id) => {
+  try{
+    const response = await fetch(`${baseURL}/api/ClassMaterials/${id}`);
+    const data = await response.json();
+    
+    if(response.ok){
+        return data;
+    }
+}catch(err){
+    console.log(err);
+}
+}

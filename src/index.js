@@ -17,6 +17,9 @@ import MeetingComponent from './components/MeetingComponent/MeetingComponent';
 import ProfileComponent from './components/ProfileComponent/ProfileComponent';
 import {Box} from "@mui/material";
 import StudyMaterialMain from './components/StudyMaterials/StudyMaterialMain';
+import CoursesComponent from './components/CoursesComponent/CoursesComponent';
+import ViewStudyMaterial from './components/StudyMaterials/ViewStudyMaterial';
+import AssignmentComponent from './components/AssignmentComponent/AssignmentComponent';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,9 +37,7 @@ const router = createBrowserRouter([
       <Protected>
         <NavbarComponent />
 
-        <div>
-          Courses
-        </div>
+        <CoursesComponent />
       </Protected>
     ),
   },
@@ -120,17 +121,35 @@ const router = createBrowserRouter([
 
       </Protected>
     )
+  },
+  {
+    path:"/assignments",
+    element:(
+      <Protected>
+        <NavbarComponent />
+      <AssignmentComponent />
+
+      </Protected>
+    )
+  },
+  {
+    path:"/viewmaterial/:materialId",
+    element:(
+      <Protected>
+        <NavbarComponent />
+      <ViewStudyMaterial />
+
+      </Protected>
+    )
   }
 ])
 
 createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <GlobalAuthStateProvider>
     <RouterProvider router={router} />
 
     </GlobalAuthStateProvider>
 
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
