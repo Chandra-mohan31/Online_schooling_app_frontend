@@ -39,10 +39,7 @@ function StudentAssignments() {
         <div style={{
           display:'flex',
 
-          justifyContent:{
-              xs:'center',
-              md:'space-between'
-          },
+          justifyContent:'center',
           alignItems:'center',
           flexWrap:'wrap'
       }}>
@@ -50,7 +47,7 @@ function StudentAssignments() {
             
             (
                 classAssignments.map(assignmentInfo => (
-                    <AssignmentInfoCard assignmentInfo={assignmentInfo} invokeStateUpdate={triggerStateUpdate} />
+                    <AssignmentInfoCard key={assignmentInfo?.id} assignmentInfo={assignmentInfo} stUpVal={stUpVal} invokeStateUpdate={triggerStateUpdate} />
                 ))
             )
             }

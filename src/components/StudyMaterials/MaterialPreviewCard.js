@@ -37,7 +37,7 @@ export default function MaterialPreviewCard({material,inStUp,isTeacher}) {
   }
 
   return (
-    <Card sx={{ width: 350,height:400 ,m:'10px',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
+    <Card sx={{ width: 350,height:400 ,m:'10px',display:'flex',flexDirection:'column',justifyContent:'space-between',boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)', }}>
  <Box>
  <CardHeader
   action={

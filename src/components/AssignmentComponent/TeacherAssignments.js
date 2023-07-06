@@ -125,10 +125,7 @@ function TeacherAssignments() {
         <div style={{
             display:'flex',
 
-            justifyContent:{
-                xs:'center',
-                md:'space-between'
-            },
+            justifyContent:'center',
             alignItems:'center',
             flexWrap:'wrap'
         }}>

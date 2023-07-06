@@ -18,7 +18,7 @@ import { getAllSessions, getUserDetails } from '../../backend_helper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: 'black',
+      backgroundColor: '#1F6E8C',
       color: 'white',
     },
     // [`&.${tableCellClasses.body}`]: {
