@@ -22,6 +22,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { fileUploadHelper } from '../../../backend_helper/imageuploadhelper';
 import ClearIcon from '@mui/icons-material/Clear';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
+import { useNavigate } from 'react-router-dom';
 
 export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,stUpVal }) {
 
@@ -32,6 +33,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
     const closeEdit = () => setDisplayEditOptions(null);
     const [fileUploading, setFileUploading] = useState(false);
     const [chosenFile, setChosenFile] = useState();
+    const navigate = useNavigate();
     const fileInputRef = React.useRef(null);
 
     const handleFileUploadClick = () => {
@@ -195,6 +197,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
                                             //  border:'1px solid black'
                                         }}
                                             onClick={() => {
+                                                navigate(`/viewsubmissions/${assignmentInfo.assignmentCode}/${subInfo.className}`);
                                                 //navigate to the assignments posted by the class for this assignment section
                                             }}
                                         >

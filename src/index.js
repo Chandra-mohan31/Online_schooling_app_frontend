@@ -20,6 +20,7 @@ import StudyMaterialMain from './components/StudyMaterials/StudyMaterialMain';
 import CoursesComponent from './components/CoursesComponent/CoursesComponent';
 import ViewStudyMaterial from './components/StudyMaterials/ViewStudyMaterial';
 import AssignmentComponent from './components/AssignmentComponent/AssignmentComponent';
+import ViewAssignmentSubmissions from './components/ViewAssignmentSubmissions/ViewAssignmentSubmissions';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -118,6 +119,16 @@ const router = createBrowserRouter([
     element:(
       <Protected>
       <MeetingComponent />
+
+      </Protected>
+    )
+  },
+  {
+    path:"/viewsubmissions/:assignmentCode/:className",
+    element:(
+      <Protected>
+      <NavbarComponent />
+      <ViewAssignmentSubmissions />
 
       </Protected>
     )

@@ -96,6 +96,7 @@ function OfficeDocumentThumbnail({ documentUrl }) {
                   frameBorder={0}
                   style={{
                     height: '150px', width: '100%', overflow: 'auto',
+                    
                     scrollbarWidth: 'thin',
                     scrollbarColor: 'lightgray darkgray',
                   }}></iframe>

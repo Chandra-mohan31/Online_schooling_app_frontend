@@ -142,3 +142,22 @@ export const postAssignmentSubmission = async (requestBody) => {
 
   }
 }
+
+
+export const getSubmissionsOfClassForAssignmentCode = async (className,assignmentCode) => {
+  try{
+    const response = await fetch(`${baseURL}/api/AssignmentSubmissionsModels/getClassSubmissions/${assignmentCode}?className=${className}`);
+    const data = await response.json();
+    console.log(data);
+    if(response.ok){
+      if(data.classSubmissions){
+        return data;
+      }else{
+        return null;
+      }
+    }
+  }catch(error){
+    console.log(error);
+    return null;
+  }
+}
