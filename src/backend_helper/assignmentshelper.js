@@ -161,3 +161,24 @@ export const getSubmissionsOfClassForAssignmentCode = async (className,assignmen
     return null;
   }
 }
+
+
+
+
+export const getUnSubmittedUsers = async (className,assignmentCode) => {
+  try{
+    const response = await fetch(`${baseURL}/api/StudentClasses/getunsubmittedusers/${assignmentCode}?className=${className}`);
+    const data = await response.json();
+    console.log(data);
+    if(response.ok){
+      if(data.studentsNotSubmitted){
+        return data;
+      }else{
+        return null;
+      }
+    }
+  }catch(error){
+    console.log(error);
+    return null;
+  }
+}

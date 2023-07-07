@@ -140,6 +140,19 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
 
     }
 
+    const isMicrosoftDocument = (contentValue) => {
+        const isPPT = contentValue?.endsWith('.ppt') || contentValue?.endsWith('.pptx');
+        const isDOC = contentValue?.endsWith('.doc') || contentValue?.endsWith('.docx');
+        const isXLS = contentValue?.endsWith('.xls') || contentValue?.endsWith('.xlsx');
+    
+    
+    
+        const isOfficeViewable = isPPT || isDOC || isXLS;
+        if (isOfficeViewable) {
+          return true;
+        }
+      }
+
     useEffect(() => {
 
         getUserSubmission();
@@ -232,7 +245,13 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
 
                                     justifyContent: 'space-between'
                                 }}>
-
+                                     <a 
+                                // href={value}
+                                href={isMicrosoftDocument(userSubmission.studentSubmissionFileURL) ? `https://view.officeapps.live.com/op/view.aspx?src=${userSubmission.studentSubmissionFileURL}` : userSubmission.studentSubmissionFileURL}
+                                target='_blank' style={{
+                                    textDecoration:'none',
+                                    color:'inherit'
+                                }}>
                                     <Box sx={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -242,6 +261,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
                                         <FileOpenIcon color='info' />
                                         <Typography variant='caption'>{userSubmission.fileName}</Typography>
                                     </Box>
+                                    </a>
                                     <IconButton onClick={() => deleteSubmission(userSubmission?.id)}>
                                         <ClearIcon color='error' />
                                     </IconButton>
