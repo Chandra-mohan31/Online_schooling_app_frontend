@@ -1,14 +1,13 @@
-import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { useModal } from '../../utils/useModal';
-import GeneralModal from '../GenerelModal/GeneralModal'
-import { getHandlingSubjects } from '../../backend_helper';
-import { AuthContext } from '../../context/authContext';
-import { getAssignmentsTeacher, postAssignment } from '../../backend_helper/assignmentshelper';
-import { useStateUpdate } from '../../utils/useStateUpdate';
-import { getPostedMaterialsTeacher } from '../../backend_helper/studymaterialshelper';
+import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { getHandlingSubjects } from '../../backend_helper';
+import { getAssignmentsTeacher, postAssignment } from '../../backend_helper/assignmentshelper';
+import { AuthContext } from '../../context/authContext';
+import { useModal } from '../../utils/useModal';
+import { useStateUpdate } from '../../utils/useStateUpdate';
+import GeneralModal from '../GenerelModal/GeneralModal';
 import AssignmentInfoCard from './AssignmentInfoCard/AssignmentInfoCard';
 
 

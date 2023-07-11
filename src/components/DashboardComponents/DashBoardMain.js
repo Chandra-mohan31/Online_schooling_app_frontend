@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../../context/authContext'
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 import AdminDashBoard from './AdminDashBoard';
 import StudentDashBoard from './StudentDashBoard';
 import TeacherDashBoard from './TeacherDashBoard';
-import { Navigate } from 'react-router-dom';
 
 function DashBoardMain() {
 

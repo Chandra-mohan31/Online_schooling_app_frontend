@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { TextField, FormControl, Button, FormControlLabel, Checkbox, InputLabel, MenuItem, Select, FormLabel, FormGroup, Container, Box, IconButton, Icon, CircularProgress, Typography, InputAdornment, createTheme, styled, useMediaQuery } from "@mui/material";
-import { KeyOutlined, KeyRounded, Man, Man2Outlined, Woman, WomanOutlined } from '@mui/icons-material';
+import { Man, Man2Outlined, Woman, WomanOutlined } from '@mui/icons-material';
+import BadgeIcon from '@mui/icons-material/Badge';
+import ClearIcon from '@mui/icons-material/Clear';
+import EmailIcon from '@mui/icons-material/Email';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import PhoneIcon from '@mui/icons-material/Phone';
+import { Box, Button, Checkbox, CircularProgress, FormControl, FormControlLabel, FormGroup, IconButton, InputAdornment, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import AWS from "aws-sdk";
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import bgImage from "../../images/elearning2.jpg";
-import BadgeIcon from '@mui/icons-material/Badge';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import ClearIcon from '@mui/icons-material/Clear';
-import AlertModal from '../AlertModal/AlertModal';
 import { useModal } from '../../utils/useModal';
+import AlertModal from '../AlertModal/AlertModal';
 
 
 

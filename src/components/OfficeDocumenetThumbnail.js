@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import WebViewer from '@pdftron/webviewer';
-import TextViewer from './TextViewer';
+import React, { useState } from 'react';
 import "../components/styles/scrollbar.css";
+import TextViewer from './TextViewer';
 
 function OfficeDocumentThumbnail({ documentUrl }) {
-  const [thumbnail, setThumbnail] = useState();
+  // const [thumbnail, setThumbnail] = useState();
 
 
   //   useEffect(() => {

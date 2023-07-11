@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react'
-import { getStudentClass } from '../../backend_helper/timetablehelper';
+import React, { useContext, useEffect, useState } from 'react';
 import { getMaterialsOfClass } from "../../backend_helper/studymaterialshelper";
+import { getStudentClass } from '../../backend_helper/timetablehelper';
 import { AuthContext } from '../../context/authContext';
 import MaterialPreviewCard from './MaterialPreviewCard';
 

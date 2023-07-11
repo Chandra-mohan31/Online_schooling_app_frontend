@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Typography, Box, Container, Button, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
-import { Card, CardContent, Avatar, Grid, TextField, InputAdornment } from '@mui/material';
 import styled from '@emotion/styled';
+import { Avatar, Box, Button, Card, CardContent, CircularProgress, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
-import UserCard from './UserCard';
-import { Navigate, useNavigate } from 'react-router-dom';
 
-import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 import BadgeIcon from '@mui/icons-material/Badge';
-import { editUserProfile, getHandlingSubjects, logoutUser } from '../../backend_helper';
+import { editUserProfile, getHandlingSubjects } from '../../backend_helper';
 import { s3UploadUrl } from '../../backend_helper/imageuploadhelper';
 import { getStudentClass } from '../../backend_helper/timetablehelper';
 

@@ -1,9 +1,8 @@
+import { Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/authContext';
-import { getStudentClass } from '../../backend_helper/timetablehelper';
 import { getAssignmentsOfClass } from '../../backend_helper/assignmentshelper';
-import { Box, CircularProgress, LinearProgress, Typography } from '@mui/material';
-import LoadingComponent from '../LoadingComponent';
+import { getStudentClass } from '../../backend_helper/timetablehelper';
+import { AuthContext } from '../../context/authContext';
 import { useStateUpdate } from '../../utils/useStateUpdate';
 import AssignmentInfoCard from './AssignmentInfoCard/AssignmentInfoCard';
 

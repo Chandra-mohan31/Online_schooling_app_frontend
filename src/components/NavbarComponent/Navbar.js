@@ -1,27 +1,23 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import CallIcon from '@mui/icons-material/Call';
-import { useLocation, useNavigate } from 'react-router';
-import { Logout, getLoggedInUserDetails, isLoggedIn, logoutUser } from '../../backend_helper';
-import SchoolIcon from '@mui/icons-material/School';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/authContext';
-import { Link } from 'react-router-dom';
 import { Person } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
+import SchoolIcon from '@mui/icons-material/School';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import { useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { isLoggedIn, logoutUser } from '../../backend_helper';
+import { AuthContext } from '../../context/authContext';
 
 
 

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
-import TableComponent from '../TableComponent/TableComponent'
+import React, { useContext, useEffect, useState } from 'react';
 import { getStudentClass, getTimeTableHelper } from '../../backend_helper/timetablehelper';
 import { AuthContext } from '../../context/authContext';
+import TableComponent from '../TableComponent/TableComponent';
 
 function StudentDashBoard() {
   const {isSignedIn,loggedInUser} = useContext(AuthContext);

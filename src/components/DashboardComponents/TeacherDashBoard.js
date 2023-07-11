@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { getTimeTableHelper } from '../../backend_helper/timetablehelper';
 import { AuthContext } from '../../context/authContext';
 import TableComponent from '../TableComponent/TableComponent';

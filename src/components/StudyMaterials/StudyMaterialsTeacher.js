@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import GeneralModal from '../GenerelModal/GeneralModal'
-import { useModal } from '../../utils/useModal';
-import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
 import { getHandlingSubjects } from '../../backend_helper';
-import { AuthContext } from '../../context/authContext';
 import { fileUploadHelper } from '../../backend_helper/imageuploadhelper';
 import { getPostedMaterialsTeacher, postStudyMaterial } from '../../backend_helper/studymaterialshelper';
+import { AuthContext } from '../../context/authContext';
+import { useModal } from '../../utils/useModal';
+import GeneralModal from '../GenerelModal/GeneralModal';
 import MaterialPreviewCard from './MaterialPreviewCard';
 
 const ITEM_HEIGHT = 48;

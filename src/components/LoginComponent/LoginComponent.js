@@ -1,14 +1,14 @@
-import { Box, Button, Checkbox, CircularProgress, Container, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react'
-import { handleLogin, isLoggedIn } from '../../backend_helper';
-import { Link, useNavigate } from 'react-router-dom';
-import bgImage from "../../images/elearning1.jpg";
 import EmailIcon from '@mui/icons-material/Email';
-import "./LoginComponent.css";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { Box, Button, Checkbox, CircularProgress, FormControlLabel, FormGroup, InputAdornment, TextField } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { handleLogin } from '../../backend_helper';
+import { AuthContext } from '../../context/authContext';
+import bgImage from "../../images/elearning1.jpg";
 import { useModal } from '../../utils/useModal';
 import AlertModal from '../AlertModal/AlertModal';
-import { AuthContext } from '../../context/authContext';
+import "./LoginComponent.css";
 
 function LoginComponent() {
     const navigate = useNavigate();

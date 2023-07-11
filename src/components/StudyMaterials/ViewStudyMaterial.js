@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMaterialInfo } from '../../backend_helper/studymaterialshelper';
-import { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
 import TextViewer from '../TextViewer';
 
 function ViewStudyMaterial() {

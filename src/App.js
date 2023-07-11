@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { AuthContext } from './context/authContext'
+import React, { useContext } from 'react';
+import { AuthContext } from './context/authContext';
 
 function App() {
   //test 

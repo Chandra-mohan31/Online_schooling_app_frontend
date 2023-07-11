@@ -1,27 +1,23 @@
 import React from 'react';
-import ReactDOM, { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
-import RegisterComponent from './components/RegisterComponent/RegisterComponent';
-import LoginComponent from './components/LoginComponent/LoginComponent';
-import Protected from './components/Protected';
-import { isLoggedIn } from "./backend_helper/index";
-import NotLoggedIn from './components/NotLoggedIn';
-import ForgotPassword from './components/ForgotPassword/ForgotPassword';
-import NavbarComponent from './components/NavbarComponent/Navbar';
-import { GlobalAuthStateProvider } from './context/authContext';
-import DashBoardMain from './components/DashboardComponents/DashBoardMain';
-import MeetingComponent from './components/MeetingComponent/MeetingComponent';
-import ProfileComponent from './components/ProfileComponent/ProfileComponent';
-import {Box, Typography} from "@mui/material";
-import StudyMaterialMain from './components/StudyMaterials/StudyMaterialMain';
-import CoursesComponent from './components/CoursesComponent/CoursesComponent';
-import ViewStudyMaterial from './components/StudyMaterials/ViewStudyMaterial';
+import { createRoot } from 'react-dom/client';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import AssignmentComponent from './components/AssignmentComponent/AssignmentComponent';
+import CoursesComponent from './components/CoursesComponent/CoursesComponent';
+import DashBoardMain from './components/DashboardComponents/DashBoardMain';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import LoginComponent from './components/LoginComponent/LoginComponent';
+import MeetingComponent from './components/MeetingComponent/MeetingComponent';
+import NavbarComponent from './components/NavbarComponent/Navbar';
+import NotLoggedIn from './components/NotLoggedIn';
+import ProfileComponent from './components/ProfileComponent/ProfileComponent';
+import Protected from './components/Protected';
+import RegisterComponent from './components/RegisterComponent/RegisterComponent';
+import StudyMaterialMain from './components/StudyMaterials/StudyMaterialMain';
+import ViewStudyMaterial from './components/StudyMaterials/ViewStudyMaterial';
 import ViewAssignmentSubmissions from './components/ViewAssignmentSubmissions/ViewAssignmentSubmissions';
-import LinearLoading from './components/LinearLoadingComponent/LinearLoading';
+import { GlobalAuthStateProvider } from './context/authContext';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
 const router = createBrowserRouter([
   {
     path: "/",

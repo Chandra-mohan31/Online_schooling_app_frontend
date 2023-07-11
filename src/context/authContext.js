@@ -1,8 +1,7 @@
 
 //try to change the helper isLoggedIn function and getUser details function in helper file to  global context to avoid repeated calling to functions 
 
-import { useEffect, useState } from "react";
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { getLoggedInUserDetails } from "../backend_helper";
 
 export const AuthContext = createContext();

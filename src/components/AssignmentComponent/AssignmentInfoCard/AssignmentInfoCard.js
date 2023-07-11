@@ -1,28 +1,24 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
+import { Delete } from '@mui/icons-material';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import ClearIcon from '@mui/icons-material/Clear';
+import FileOpenIcon from '@mui/icons-material/FileOpen';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Box, Button, CircularProgress, LinearProgress, Menu, MenuItem, TextField, Tooltip } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { AuthContext } from '../../../context/authContext';
-import { Box, Button, CircularProgress, InputLabel, LinearProgress, Menu, MenuItem, TextField, Tooltip } from '@mui/material';
-import "../../styles/scrollbar.css";
-import { Clear, Delete } from '@mui/icons-material';
-import { useState } from 'react';
-import { deleteAssignmentPosted, deleteStudentSubmission, getAssignmentSubmissionOfStudent, postAssignmentSubmission, updateDueDate } from '../../../backend_helper/assignmentshelper';
-import { useEffect } from 'react';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
-import { fileUploadHelper } from '../../../backend_helper/imageuploadhelper';
-import ClearIcon from '@mui/icons-material/Clear';
-import FileOpenIcon from '@mui/icons-material/FileOpen';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { deleteAssignmentPosted, deleteStudentSubmission, getAssignmentSubmissionOfStudent, postAssignmentSubmission, updateDueDate } from '../../../backend_helper/assignmentshelper';
+import { fileUploadHelper } from '../../../backend_helper/imageuploadhelper';
+import { AuthContext } from '../../../context/authContext';
+import "../../styles/scrollbar.css";
 
 export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, stUpVal }) {
 

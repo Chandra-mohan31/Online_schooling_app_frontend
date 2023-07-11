@@ -1,20 +1,19 @@
-import * as React from 'react';
+import styled from '@emotion/styled';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { Box, Button, Card, CardContent, IconButton, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { useEffect } from 'react';
-import { Typography,Button,IconButton ,Box,Card,CardContent} from '@mui/material';
-import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { getAllSessions, getUserDetails } from '../../backend_helper';
+import { getAllSessions } from '../../backend_helper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
