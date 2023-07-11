@@ -25,8 +25,7 @@ jobs:
         run: |
           npm install
           npm run build 
-        environment: 
-          CI: false
+        
           
 
       - name: Upload artifact for deployment job
