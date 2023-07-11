@@ -24,7 +24,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import { useNavigate } from 'react-router-dom';
 
-export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,stUpVal }) {
+export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, stUpVal }) {
 
     const { loggedInUser } = React.useContext(AuthContext);
     const [displayEditOptions, setDisplayEditOptions] = React.useState(null);
@@ -67,28 +67,28 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
             if (response?.studentSubmission) {
                 setUserSubmission(response.studentSubmission);
 
-            }else{
+            } else {
                 setUserSubmission(null);
             }
         }
     }
 
-    const submitAssignment = async (fileSubmissionUrl,fileName,fileType) => {
-        if(loggedInUser && loggedInUser?.role == 'Student' && assignmentInfo){
-            const body =  {
+    const submitAssignment = async (fileSubmissionUrl, fileName, fileType) => {
+        if (loggedInUser && loggedInUser?.role == 'Student' && assignmentInfo) {
+            const body = {
                 assignmentId: assignmentInfo?.id,
                 studentUserName: loggedInUser?.email,
                 studentSubmissionFileURL: fileSubmissionUrl,
                 studentProfileUrl: loggedInUser?.imageUrl,
                 fileName: fileName,
                 fileType: fileType
-              }
-    
+            }
+
             console.log(body);
             await postAssignmentSubmission(body);
             invokeStateUpdate();
         }
-      
+
 
     }
 
@@ -104,7 +104,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
 
 
                 console.log('File uploaded successfully:', response);
-                await submitAssignment(response,file.name,file.type);
+                await submitAssignment(response, file.name, file.type);
                 //set the file uploaded url
             } catch (error) {
 
@@ -144,28 +144,29 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
         const isPPT = contentValue?.endsWith('.ppt') || contentValue?.endsWith('.pptx');
         const isDOC = contentValue?.endsWith('.doc') || contentValue?.endsWith('.docx');
         const isXLS = contentValue?.endsWith('.xls') || contentValue?.endsWith('.xlsx');
-    
-    
-    
+
+
+
         const isOfficeViewable = isPPT || isDOC || isXLS;
         if (isOfficeViewable) {
-          return true;
+            return true;
         }
-      }
+    }
 
     useEffect(() => {
-
         getUserSubmission();
     }, [stUpVal])
 
     return (
-        <Card sx={{ height: '300px', width: '380px', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',  }}>
+        <Card sx={{ height: '300px', width: '380px', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)', }}>
             <CardHeader
                 avatar={
                     loggedInUser?.role == 'Teacher' ?
                         <Avatar src={loggedInUser?.imageUrl} sx={{ bgcolor: red[500] }} aria-label="recipe">
 
-                        </Avatar> : null
+                        </Avatar> : <Avatar src={assignmentInfo.email} sx={{ bgcolor: red[500] }} alt={assignmentInfo.email} aria-label="recipe">
+                        {assignmentInfo.email ? assignmentInfo.email.charAt(0).toUpperCase() : ''}
+                        </Avatar>
                 }
                 action={
                     loggedInUser?.role == 'Teacher' ?
@@ -236,35 +237,38 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
                             {userSubmission ? (
 
                                 <Box sx={{
-                                    minWidth:'90%',
-                                    maxWidth:'100%',
-                                    padding:'5px',
-                                    backgroundColor:'whitesmoke',
+                                    minWidth: '90%',
+                                    maxWidth: '100%',
+                                    padding: '5px',
+                                    backgroundColor: 'whitesmoke',
                                     display: 'flex',
                                     alignItems: 'center',
 
                                     justifyContent: 'space-between'
                                 }}>
-                                     <a 
-                                // href={value}
-                                href={isMicrosoftDocument(userSubmission.studentSubmissionFileURL) ? `https://view.officeapps.live.com/op/view.aspx?src=${userSubmission.studentSubmissionFileURL}` : userSubmission.studentSubmissionFileURL}
-                                target='_blank' style={{
-                                    textDecoration:'none',
-                                    color:'inherit'
-                                }}>
-                                    <Box sx={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'flex-start',
-                                        cursor: 'pointer'
-                                    }}>
-                                        <FileOpenIcon color='info' />
-                                        <Typography variant='caption'>{userSubmission.fileName}</Typography>
-                                    </Box>
+                                    <a
+                                        // href={value}
+                                        href={isMicrosoftDocument(userSubmission.studentSubmissionFileURL) ? `https://view.officeapps.live.com/op/view.aspx?src=${userSubmission.studentSubmissionFileURL}` : userSubmission.studentSubmissionFileURL}
+                                        target='_blank' style={{
+                                            textDecoration: 'none',
+                                            color: 'inherit'
+                                        }}>
+                                        <Box sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'flex-start',
+                                            cursor: 'pointer'
+                                        }}>
+                                            <FileOpenIcon color='info' />
+                                            <Typography variant='caption'>{userSubmission.fileName}</Typography>
+                                        </Box>
                                     </a>
-                                    <IconButton onClick={() => deleteSubmission(userSubmission?.id)}>
-                                        <ClearIcon color='error' />
-                                    </IconButton>
+                                    
+                                    {new Date(assignmentInfo.dueDateTime) > new Date() ? (
+                                        <IconButton onClick={() => deleteSubmission(userSubmission?.id)}>
+                                        <ClearIcon color='warning' />
+                                        </IconButton>
+                                    ) : null}
 
                                 </Box>
                             ) : (
@@ -273,38 +277,38 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate,s
                                 fileUploading ? <CircularProgress sx={{ textAlign: 'center' }} /> : (
 
 
-                                        <Box
-                                            sx={{
-                                                border: '1px dashed grey',
-                                                borderRadius: '10px',
-                                                textAlign: 'center',
-                                                cursor: 'pointer',
-                                                minWidth:'90%',
-                                                maxWidth:'100%',
-                                                padding:'5px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-            
-                                                justifyContent: 'space-between'
+                                    <Box
+                                        sx={{
+                                            border: '1px dashed grey',
+                                            borderRadius: '10px',
+                                            textAlign: 'center',
+                                            cursor: 'pointer',
+                                            minWidth: '90%',
+                                            maxWidth: '100%',
+                                            padding: '5px',
+                                            display: 'flex',
+                                            alignItems: 'center',
 
-                                            }}
-                                            onClick={handleFileUploadClick}
-                                            onDrop={handleDrop}
-                                            onDragOver={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
+                                            justifyContent: 'space-between'
 
-                                            }}
+                                        }}
+                                        onClick={handleFileUploadClick}
+                                        onDrop={handleDrop}
+                                        onDragOver={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+
+                                        }}
 
 
 
-                                        >
-                                            <Typography variant='caption'>Upload your submission</Typography>
-                                            <IconButton>
-                                                <AttachFileIcon color='info' />
-                                                <input type="file" ref={fileInputRef} hidden onChange={uploadAssignmentToS3} />
-                                            </IconButton>
-                                        </Box>
+                                    >
+                                        <Typography variant='caption'>Upload your submission</Typography>
+                                        <IconButton>
+                                            <AttachFileIcon color='info' />
+                                            <input type="file" ref={fileInputRef} hidden onChange={uploadAssignmentToS3} />
+                                        </IconButton>
+                                    </Box>
 
                                 )
 

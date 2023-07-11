@@ -91,7 +91,7 @@ function ForgotPassword() {
             passCodeSent ? (
                 <div style={{
                     padding:"30px",
-                    fontFamily:"cursive"
+                    fontFamily:"Arial"
                 }}>
             
                     <h1>Please enter your New Password</h1>
@@ -135,7 +135,7 @@ function ForgotPassword() {
             ):(
                 <div style={{
                     padding:"30px",
-                    fontFamily:"cursive"
+                    fontFamily:"Arial"
                 }}>
             
                     <h1>Please enter your Registerd Email</h1>

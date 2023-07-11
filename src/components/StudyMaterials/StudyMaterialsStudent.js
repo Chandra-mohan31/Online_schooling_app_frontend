@@ -50,9 +50,9 @@ function StudyMaterialsStudent() {
     }}>
   
       {
-        classMaterials && classMaterials.map(material => (
+        classMaterials ? classMaterials.map(material => (
           <MaterialPreviewCard material={material} key={material.id} isTeacher={false} />
-        ))
+        )) :<Typography variant='body1' textAlign='center'>No Materials Found!</Typography>
       }
     </Box>
     </Box>

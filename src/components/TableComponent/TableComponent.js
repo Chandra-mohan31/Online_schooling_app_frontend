@@ -115,7 +115,7 @@ const getSessionTiming = (session) => {
             textAlign:'center',
             mb:'5px',
             fontWeight:'bold',
-            fontFamily:'cursive'
+            fontFamily:'Arial'
         }}>{day}</Typography>
         
       {

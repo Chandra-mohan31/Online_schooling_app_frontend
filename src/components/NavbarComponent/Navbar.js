@@ -76,7 +76,7 @@ function NavbarComponent() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'cursive',
+              fontFamily: 'Arial',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -118,7 +118,7 @@ function NavbarComponent() {
                     handleCloseNavMenu();
                     navigate(`${page.routeto}`)
                 }}>
-                  <Typography textAlign="center" color={location.pathname.toString() == page.routeto && 'blueviolet'} fontFamily="cursive">{page.title}</Typography>
+                  <Typography textAlign="center" color={location.pathname.toString() == page.routeto && 'blueviolet'} fontFamily="Arial">{page.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -133,7 +133,7 @@ function NavbarComponent() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'cursive',
+              fontFamily: 'Arial',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -154,7 +154,7 @@ function NavbarComponent() {
               >
                 <Typography sx={{
                   textTransform:'none',
-                  fontFamily:"cursive",
+                  fontFamily:"Arial",
 
                 }}
                 color={location.pathname.toString() == page.routeto && 'cyan'}
@@ -216,7 +216,7 @@ function NavbarComponent() {
                           {setting.icon}
                         </IconButton>
                       }
-                      <Typography textAlign="center" fontFamily="cursive">{setting.title}</Typography></Link>
+                      <Typography textAlign="center" fontFamily="Arial">{setting.title}</Typography></Link>
                 )}
               </MenuItem>
             ))}

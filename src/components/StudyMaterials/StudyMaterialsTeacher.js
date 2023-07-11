@@ -202,9 +202,9 @@ function StudyMaterialsTeacher() {
                 alignItems:'center'
             }}>
                 {
-                   postedMaterials && postedMaterials.map(material => (
+                   (postedMaterials && postedMaterials.length > 0) ? postedMaterials.map(material => (
                         <MaterialPreviewCard material={material} key={material.id} inStUp={inStUp} isTeacher={true}/>
-                    ))
+                    )) : <Typography variant='body1'>No study Materials have been Posted by You!</Typography>
                 }
             </Box>
 

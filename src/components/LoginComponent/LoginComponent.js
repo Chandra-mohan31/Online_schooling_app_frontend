@@ -36,7 +36,7 @@ function LoginComponent() {
         backgroundColor:"white",
         height:"100vh",
         margin:0,
-        fontFamily:"cursive",
+        fontFamily:"Arial",
         display:"grid",
         placeItems:"center"
     }} >

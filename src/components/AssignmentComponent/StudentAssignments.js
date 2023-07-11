@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { getStudentClass } from '../../backend_helper/timetablehelper';
 import { getAssignmentsOfClass } from '../../backend_helper/assignmentshelper';
-import { Box, CircularProgress, LinearProgress } from '@mui/material';
+import { Box, CircularProgress, LinearProgress, Typography } from '@mui/material';
 import LoadingComponent from '../LoadingComponent';
 import { useStateUpdate } from '../../utils/useStateUpdate';
 import AssignmentInfoCard from './AssignmentInfoCard/AssignmentInfoCard';
@@ -20,7 +20,12 @@ function StudentAssignments() {
       setClassName(belongingClass);
       const response = await getAssignmentsOfClass(belongingClass);
       console.log(response);
-      setClassAssignments(response?.classAssignments);
+      const tempAssignments = response?.classAssignments;
+      tempAssignments.sort((a, b) => new Date(a.dueDateTime) - new Date(b.dueDateTime));
+      // setClassAssignments(response?.classAssignments);
+      setClassAssignments(tempAssignments);
+
+      
     }
 
 
@@ -53,7 +58,7 @@ function StudentAssignments() {
             }
             </div>
         ) : (
-        <LoadingComponent />
+        <Typography variant='body1' textAlign='center'>No Assignments found!</Typography>
         )
       }
     </div>

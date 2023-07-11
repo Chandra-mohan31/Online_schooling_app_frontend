@@ -8,6 +8,7 @@ import GeneralModal from '../GenerelModal/GeneralModal';
 import ClearIcon from '@mui/icons-material/Clear';
 import InfoIcon from '@mui/icons-material/Info';
 import {styled} from '@mui/material/styles';
+import LinearLoading from '../LinearLoadingComponent/LinearLoading';
 
 
 const HtmlTooltip = styled(({ className, ...props }) => (
@@ -183,8 +184,14 @@ useEffect(()=> {
             
 
     
+        {
+            updating ?  (<LinearLoading>
+            <Box>
+              <Typography variant='body1' textAlign='center'>Dont refresh or go back , wait for a while it may take a few minutes!</Typography>
+            </Box>
+          </LinearLoading>) : 
         
-           
+           (
                 <div className='class_mappings'>
                     {
                         CLASSES.map((className, classIndex) => (
@@ -230,7 +237,7 @@ useEffect(()=> {
                                                                    <Typography variant='body1' sx={{
                                                                        color:"black",
                                                                        fontWeight:"bold",
-                                                                       fontFamily:"cursive"
+                                                                       fontFamily:"Arial"
                                                                    }} align='center'>Session Details</Typography>
                                                                    <Typography variant='body2' color='InfoText' align='center'>
                                                                        <span className='session_details_caption'>Session : </span> {session.session} 
@@ -311,7 +318,8 @@ useEffect(()=> {
                         ))
                     }
                 </div>
-            
+           )
+}
         
     
     <GeneralModal open={open} closeModal={closeModal}>

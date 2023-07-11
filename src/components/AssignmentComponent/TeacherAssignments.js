@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField } from '@mui/material'
+import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { useModal } from '../../utils/useModal';
@@ -28,6 +28,7 @@ function TeacherAssignments() {
     const [cName, setCName] = React.useState([]);
     const { loggedInUser } = useContext(AuthContext);
     const [classes, setClasses] = useState([]);
+    const [postingAssignment,setPostingAssignment] = useState(false);
     const {stUpVal,triggerStateUpdate} = useStateUpdate();
 
     const handleChangeClasses = (event) => {
@@ -82,6 +83,7 @@ function TeacherAssignments() {
     }
 
     const handlePostAssignment = async (e) => {
+        setPostingAssignment(true);
         e.preventDefault();
         const body = {...assignmentBody};
         body.postedByEmail = loggedInUser?.email;
@@ -92,12 +94,14 @@ function TeacherAssignments() {
             body.forClass = c;
             console.log(body);
             await postAssignment(body);
-            triggerStateUpdate();
-            closeModal();
+           
           
 
         }
-        alert("posted assignment successfully!");
+        triggerStateUpdate();
+        closeModal();
+        setPostingAssignment(false);
+        
         
     }
 
@@ -129,12 +133,14 @@ function TeacherAssignments() {
             alignItems:'center',
             flexWrap:'wrap'
         }}>
-            {postedAssignments && 
+            {(postedAssignments && postedAssignments.length > 0) ? 
             
             (
                 postedAssignments.map(assignmentInfo => (
                     <AssignmentInfoCard assignmentInfo={assignmentInfo} invokeStateUpdate={triggerStateUpdate} />
                 ))
+            ) : (
+                <Typography variant='body1' textAlign='center'>No Assignments were Posted by You!</Typography>
             )
             }
         </div>
@@ -251,7 +257,12 @@ function TeacherAssignments() {
                         />
 
 
-                        <Button type='submit' variant='outlined' color='warning' disabled={!checkRequiredFields()} onClick={handlePostAssignment}>POST</Button>
+                        {
+                            postingAssignment ? <CircularProgress sx={{textAlign:'center'}} /> : <Box sx={{
+                                display:'grid',
+                                placeItems:'center'
+                            }}><Button type='submit' variant='outlined' color='warning' disabled={!checkRequiredFields()} onClick={handlePostAssignment}>POST</Button></Box>
+                        }
 
 
 

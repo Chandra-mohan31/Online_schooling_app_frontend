@@ -15,12 +15,13 @@ import { GlobalAuthStateProvider } from './context/authContext';
 import DashBoardMain from './components/DashboardComponents/DashBoardMain';
 import MeetingComponent from './components/MeetingComponent/MeetingComponent';
 import ProfileComponent from './components/ProfileComponent/ProfileComponent';
-import {Box} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import StudyMaterialMain from './components/StudyMaterials/StudyMaterialMain';
 import CoursesComponent from './components/CoursesComponent/CoursesComponent';
 import ViewStudyMaterial from './components/StudyMaterials/ViewStudyMaterial';
 import AssignmentComponent from './components/AssignmentComponent/AssignmentComponent';
 import ViewAssignmentSubmissions from './components/ViewAssignmentSubmissions/ViewAssignmentSubmissions';
+import LinearLoading from './components/LinearLoadingComponent/LinearLoading';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -105,13 +106,18 @@ const router = createBrowserRouter([
   {
     path: "/customerSupport",
     element: (
-      <NotLoggedIn>
+      <Protected>
         <NavbarComponent />
 
         <div>
           Customer Support
         </div>
-      </NotLoggedIn>
+        {/* <LinearLoading>
+          <Box>
+            <Typography variant='body1' textAlign='center'>Dont refresh or go back , wait for a while it may take a few minutes!</Typography>
+          </Box>
+        </LinearLoading> */}
+      </Protected>
     )
   },
   {

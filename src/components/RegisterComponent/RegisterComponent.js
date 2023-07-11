@@ -208,7 +208,7 @@ function RegisterComponent() {
         <div style={{
             padding:"30px",
             backgroundColor:"white",
-            fontFamily:"cursive"
+            fontFamily:"Arial"
         }}>
 
         <div style={{
@@ -240,7 +240,7 @@ function RegisterComponent() {
             }}>
                 <h2  style={{
                     textAlign:"center",
-                    fontFamily:"cursive"
+                    fontFamily:"Arial"
                 }}>Register as a user</h2>
 
                 <TextField
