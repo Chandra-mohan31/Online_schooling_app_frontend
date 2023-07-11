@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Avatar, Box, Button, Card, CardContent, CircularProgress, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 
 import EmailIcon from '@mui/icons-material/Email';
@@ -54,10 +53,7 @@ function ProfileComponent() {
     const [editMode, setEditMode] = useState(false);
     console.log(loggedInUser);
 
-    const formatDate = (datetime) => {
-        const formattedDate = datetime.substring(0, 10);
-    }
-    const navigate = useNavigate();
+    
 
     const isUserDetailsChanged = (
         updatedUserDetails.userName !== loggedInUser?.userName ||
@@ -72,7 +68,7 @@ function ProfileComponent() {
         const response = await editUserProfile(loggedInUser.id, updatedUserDetails);
 
         console.log(response);
-        if (response.message == 'user details updated!') {
+        if (response.message === 'user details updated!') {
             alert('details updated successfully!');
             setEditMode(false);
             inStUpdate();
@@ -101,9 +97,9 @@ function ProfileComponent() {
     }
   
         if(loggedInUser){
-            if(loggedInUser.role == "Student"){
+            if(loggedInUser.role === "Student"){
                 getStudentBelongingClass();
-            }else if(loggedInUser.role == "Teacher"){
+            }else if(loggedInUser.role === "Teacher"){
                 handlingSubject();
             }
            
@@ -322,7 +318,7 @@ function ProfileComponent() {
                         }} variant='body1'>Your Role : <span style={{ color: 'violet' }}>{loggedInUser?.role}</span></Typography>
                         
                         {
-                            (loggedInUser?.role =='Student' && studentClass) && (
+                            (loggedInUser?.role ==='Student' && studentClass) && (
                                 <Typography sx={{
                                     margin:'10px'
                                 }} variant='body1'>Your Class : <span style={{ color: 'violet' }}>{studentClass}</span></Typography>
@@ -331,7 +327,7 @@ function ProfileComponent() {
                     }
 
                     {
-                      (loggedInUser?.role =='Teacher' && handlingSub) && (
+                      (loggedInUser?.role ==='Teacher' && handlingSub) && (
                         <Typography sx={{
                             margin:'10px'
                         }} variant='body1'>Your Subject : <span style={{ color: 'violet' }}>{handlingSub}</span></Typography>

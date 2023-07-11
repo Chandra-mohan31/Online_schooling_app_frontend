@@ -75,7 +75,7 @@ function TeacherAssignments() {
 
     }
     const checkRequiredFields = () => {
-        if(assignmentBody.description == '' || assignmentBody.title == '' || assignmentBody.dueDateTime == null || cName.length == 0){
+        if(assignmentBody.description === '' || assignmentBody.title === '' || assignmentBody.dueDateTime === null || cName.length === 0){
             return false;
         }
         return true;

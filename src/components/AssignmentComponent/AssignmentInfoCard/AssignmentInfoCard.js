@@ -28,7 +28,6 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
     const openEdit = (e) => setDisplayEditOptions(e.currentTarget);
     const closeEdit = () => setDisplayEditOptions(null);
     const [fileUploading, setFileUploading] = useState(false);
-    const [chosenFile, setChosenFile] = useState();
     const navigate = useNavigate();
     const fileInputRef = React.useRef(null);
 
@@ -54,7 +53,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
     const [userSubmission, setUserSubmission] = useState();
 
     const getUserSubmission = async () => {
-        if (loggedInUser && loggedInUser.role == "Student" && assignmentInfo) {
+        if (loggedInUser && loggedInUser.role === "Student" && assignmentInfo) {
             console.log(loggedInUser.email);
             console.log(assignmentInfo.id);
 
@@ -70,7 +69,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
     }
 
     const submitAssignment = async (fileSubmissionUrl, fileName, fileType) => {
-        if (loggedInUser && loggedInUser?.role == 'Student' && assignmentInfo) {
+        if (loggedInUser && loggedInUser?.role === 'Student' && assignmentInfo) {
             const body = {
                 assignmentId: assignmentInfo?.id,
                 studentUserName: loggedInUser?.email,
@@ -93,7 +92,6 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
         setFileUploading(true);
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            setChosenFile(file);
 
             try {
                 const response = await fileUploadHelper(file);
@@ -114,7 +112,6 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
         event.preventDefault();
         const file = event.dataTransfer.files[0];
         setFileUploading(true);
-        setChosenFile(file);
         try {
             const response = await fileUploadHelper(file);
 
@@ -157,7 +154,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
         <Card sx={{ height: '300px', width: '380px', margin: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)', }}>
             <CardHeader
                 avatar={
-                    loggedInUser?.role == 'Teacher' ?
+                    loggedInUser?.role === 'Teacher' ?
                         <Avatar src={loggedInUser?.imageUrl} sx={{ bgcolor: red[500] }} aria-label="recipe">
 
                         </Avatar> : <Avatar src={assignmentInfo.email} sx={{ bgcolor: red[500] }} alt={assignmentInfo.email} aria-label="recipe">
@@ -165,7 +162,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
                         </Avatar>
                 }
                 action={
-                    loggedInUser?.role == 'Teacher' ?
+                    loggedInUser?.role === 'Teacher' ?
                         <IconButton onClick={openEdit} aria-label="settings">
                             <MoreVertIcon />
                         </IconButton> : null
@@ -183,7 +180,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
 
             {
 
-                loggedInUser.role == 'Teacher' ?
+                loggedInUser.role === 'Teacher' ?
                     <CardContent>
                         <Typography variant='caption' color='secondary' fontWeight='bold'>Submissions</Typography>
                         <Box className="scrollbar scrollbar-primary" sx={{
@@ -245,7 +242,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
                                     <a
                                         // href={value}
                                         href={isMicrosoftDocument(userSubmission.studentSubmissionFileURL) ? `https://view.officeapps.live.com/op/view.aspx?src=${userSubmission.studentSubmissionFileURL}` : userSubmission.studentSubmissionFileURL}
-                                        target='_blank' style={{
+                                        target='_blank' rel="noreferrer" style={{
                                             textDecoration: 'none',
                                             color: 'inherit'
                                         }}>
@@ -379,7 +376,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
 
 
             <CardActions disableSpacing>
-                {loggedInUser?.role == 'Teacher' ?
+                {loggedInUser?.role === 'Teacher' ?
                     <Tooltip title={assignmentInfo?.assignmentCode}>
                         <Typography
                             sx={{

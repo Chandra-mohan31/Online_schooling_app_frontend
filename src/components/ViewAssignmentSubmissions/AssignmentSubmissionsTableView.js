@@ -21,32 +21,33 @@ export default function AssignmentSubmissionsTableView({submissionData}) {
           id: 'fileName',
           label: 'File Name',
           minWidth: 170,
-          align: 'right'
+          align: 'center'
         },
         {
           id: 'submissionDateTime',
           label: 'Submitted Time',
           minWidth: 170,
-          align: 'right',
+          align: 'center',
           format: (value) => value.toLocaleString(),
+        },
+        
+        {
+          id: 'studentProfileUrl',
+          label: '',
+          minWidth: 20,
+          align: 'center',
         },
         {
           id: 'studentUserName',
           label: 'Student',
           minWidth: 170,
-          align: 'right',
-        },
-        {
-          id: 'studentProfileUrl',
-          label: '',
-          minWidth: 50,
-          align: 'left',
+          align: 'center',
         },
         {
           id: 'studentSubmissionFileURL',
           label:'View File',
           minWidth:170,
-          align:'right'
+          align:'center'
         }
       ];
       
@@ -92,13 +93,13 @@ export default function AssignmentSubmissionsTableView({submissionData}) {
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
+               column.label != '' &&  <TableCell
+               key={column.id}
+               align={column.align}
+               style={{ minWidth: column.minWidth }}
+             >
+               {column.label}
+             </TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -110,19 +111,28 @@ export default function AssignmentSubmissionsTableView({submissionData}) {
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
                       const value = row[column.id];
-                      if(column.id == 'studentProfileUrl'){
+                      if(column.id === 'studentProfileUrl'){
                         return (
                             <TableCell key={column.id} align={column.align}>
-                        <Avatar src={value || 'Profile'} alt={row['studentUserName']} />
+                               <Box sx={{
+                                    display:'flex',
+                                    alignItems:'center',
+                                    minWidth:'100%',
+                                    justifyContent:'center'
+                                }}>
+                                    <Avatar src={row['studentProfileUrl'] || 'Profile'} alt={row['studentUserName']} />
+                                    <Typography variant='caption' marginLeft='2px'>{row['studentUserName']}</Typography>
+                                </Box>
+                        
                             </TableCell>
                         );
-                      }else if(column.id == 'studentSubmissionFileURL'){
+                      }else if(column.id === 'studentSubmissionFileURL'){
                         return (
                             <TableCell key={column.id} align={column.align}>
                                 <a 
                                 // href={value}
                                 href={isMicrosoftDocument(value) ? `https://view.officeapps.live.com/op/view.aspx?src=${value}` : value}
-                                target='_blank' style={{
+                                target='_blank' rel="noreferrer" style={{
                                     textDecoration:'none',
                                     color:'inherit'
                                 }}>
@@ -138,6 +148,8 @@ export default function AssignmentSubmissionsTableView({submissionData}) {
                                 
                             </TableCell>
                         )
+                      }else if(column.id === 'studentUserName'){
+                        return null;
                       }
                       else{
                         return (

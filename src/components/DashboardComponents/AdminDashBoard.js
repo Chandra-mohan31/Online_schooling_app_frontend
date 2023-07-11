@@ -81,7 +81,7 @@ const getSessions = async () => {
  
 
 const getSessionDetails = (day,session,classname) => {
-    const sessionData = timeTable.find(t => t.day == day && t.hour == session && t.forClass == classname);
+    const sessionData = timeTable.find(t => t.day === day && t.hour === session && t.forClass === classname);
     return sessionData;
 }
 
@@ -195,7 +195,7 @@ useEffect(()=> {
                 <div className='class_mappings'>
                     {
                         CLASSES.map((className, classIndex) => (
-                            <div style={{
+                            <div key={classIndex} style={{
                                 padding:"10px"
                             }}>
                             <h3 style={{
@@ -265,8 +265,8 @@ useEffect(()=> {
                                                        </HtmlTooltip>
 
                                                        <Tooltip title='delete this session'>
-                                                       <IconButton onClick={()=>{
-                                                           deleteTimeTable(getSessionDetails(day,session.session,className)?.id).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
+                                                       <IconButton onClick={ async ()=>{
+                                                           await deleteTimeTable(getSessionDetails(day,session.session,className)?.id);
                                                            invokeStateUpdate();
                                                        }}>
                                                            <ClearIcon color='error' />
@@ -388,10 +388,10 @@ useEffect(()=> {
             alignItems:"center",
             justifyContent:"space-between"
          }}>
-         <Button disabled={createTimeTableBody.teacherMail == '' && true} variant='outlined' color='primary' sx={{
+         <Button disabled={createTimeTableBody.teacherMail === '' && true} variant='outlined' color='primary' sx={{
             margin:"10px"
-         }} onClick={()=>{
-                postToTimeTable(createTimeTableBody);
+         }} onClick={async ()=>{
+                await postToTimeTable(createTimeTableBody);
                 invokeStateUpdate();
                 closeModal();
             }}>POST</Button>

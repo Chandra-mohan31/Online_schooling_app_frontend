@@ -13,8 +13,8 @@ function StudyMaterialMain() {
   
       {loggedInUser ? 
         (
-          loggedInUser.role == 'Student' ? <StudyMaterialsStudent /> : (
-            loggedInUser.role == 'Teacher' ? <StudyMaterialsTeacher /> : (
+          loggedInUser.role === 'Student' ? <StudyMaterialsStudent /> : (
+            loggedInUser.role === 'Teacher' ? <StudyMaterialsTeacher /> : (
               <Navigate to="/dashboard" />
             )
           )

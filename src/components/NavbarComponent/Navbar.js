@@ -46,7 +46,7 @@ function NavbarComponent() {
   };
   const navigate = useNavigate();
   const handleLogout = () => {
-        if(logoutUser()=="logged out successfully!"){
+        if(logoutUser()==="logged out successfully!"){
           invokeStateUpdate(false);
             navigate("/login");
         }else{
@@ -114,7 +114,7 @@ function NavbarComponent() {
                     handleCloseNavMenu();
                     navigate(`${page.routeto}`)
                 }}>
-                  <Typography textAlign="center" color={location.pathname.toString() == page.routeto && 'blueviolet'} fontFamily="Arial">{page.title}</Typography>
+                  <Typography textAlign="center" color={location.pathname.toString() === page.routeto && 'blueviolet'} fontFamily="Arial">{page.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -153,7 +153,7 @@ function NavbarComponent() {
                   fontFamily:"Arial",
 
                 }}
-                color={location.pathname.toString() == page.routeto && 'cyan'}
+                color={location.pathname.toString() === page.routeto && 'cyan'}
                 >
                 {page.title}
                 </Typography>

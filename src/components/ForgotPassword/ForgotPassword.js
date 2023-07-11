@@ -129,7 +129,7 @@ function ForgotPassword() {
                                
                             />
                         
-                    <Button disabled={password == null || password.length == 0 || passCodeValue == null ||passCodeValue.length == 0} variant='contained' color='info' onClick={resetPassword} >Reset Password</Button>
+                    <Button disabled={password === null || password.length === 0 || passCodeValue === null ||passCodeValue.length === 0} variant='contained' color='info' onClick={resetPassword} >Reset Password</Button>
             
                 </div>
             ):(
@@ -157,7 +157,7 @@ function ForgotPassword() {
                                     
                                   }}
                             />
-                            <Button variant='contained' color='info' disabled={email.length == 0 || email == null} onClick={getPasswordResetCode} >Get Code</Button>
+                            <Button variant='contained' color='info' disabled={email.length === 0 || email === null} onClick={getPasswordResetCode} >Get Code</Button>
             
                 </div>
             )

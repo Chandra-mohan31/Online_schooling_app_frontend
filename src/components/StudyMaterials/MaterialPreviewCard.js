@@ -21,7 +21,7 @@ export default function MaterialPreviewCard({material,inStUp,isTeacher}) {
 
  
   const deletePostedMaterial = async (materialId) => {
-    const response = await deleteMaterial(materialId);
+    await deleteMaterial(materialId);
     inStUp();
   }
 
@@ -70,13 +70,13 @@ export default function MaterialPreviewCard({material,inStUp,isTeacher}) {
         <OfficeDocumentThumbnail documentUrl={material?.materialContentUrl} />
 
           </div>
-        <Button variant='outlined' color='secondary' sx={{
+        <Button variant='outlined' color='info' sx={{
           width:'100%',
           
 
         }} onClick={()=>{
             navigate(`/viewmaterial/${material?.id}`);
-        }}>OPEN MATERIAL</Button>
+        }}>OPEN</Button>
    
       </CardContent>
      
@@ -109,7 +109,7 @@ export default function MaterialPreviewCard({material,inStUp,isTeacher}) {
         <Typography variant='body2'>{material.subjectName}</Typography>
 
 
-        <a href={material?.materialContentUrl} target='_blank' style={{
+        <a href={material?.materialContentUrl} target='_blank' rel="noreferrer" style={{
           textDecoration:'none',
           color:'inherit'
         }}>

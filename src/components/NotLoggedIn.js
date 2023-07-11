@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { isLoggedIn } from '../backend_helper';
 
 function NotLoggedIn({children}) {
-    if(isLoggedIn() == false){
+    if(isLoggedIn() === false){
         return children;
     }
     

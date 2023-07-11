@@ -13,8 +13,8 @@ function AssignmentComponent() {
 
     {loggedInUser ? 
       (
-        loggedInUser.role == 'Student' ? <StudentAssignments /> : (
-          loggedInUser.role == 'Teacher' ? <TeacherAssignments /> : (
+        loggedInUser.role === 'Student' ? <StudentAssignments /> : (
+          loggedInUser.role === 'Teacher' ? <TeacherAssignments /> : (
             <Navigate to="/dashboard" />
           )
         )

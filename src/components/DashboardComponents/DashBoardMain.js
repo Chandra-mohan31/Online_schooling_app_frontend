@@ -13,9 +13,9 @@ function DashBoardMain() {
 
     {loggedInUser ? 
       (
-        loggedInUser.role == 'Admin' ? <AdminDashBoard /> : (
-          loggedInUser.role == 'Student' ? <StudentDashBoard /> : (
-            loggedInUser.role == 'Teacher' ? <TeacherDashBoard /> : <Navigate to="/login" />
+        loggedInUser.role === 'Admin' ? <AdminDashBoard /> : (
+          loggedInUser.role === 'Student' ? <StudentDashBoard /> : (
+            loggedInUser.role === 'Teacher' ? <TeacherDashBoard /> : <Navigate to="/login" />
           )
         )
       )

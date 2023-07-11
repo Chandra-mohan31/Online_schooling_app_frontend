@@ -81,7 +81,7 @@ const isTimeRangeCurrent = (timeRange) => {
   var startHour = timeParts[0];
   var endHour = timeParts[1];
   
-  if(dayOfWeek == day && currHour >= formatHour(startHour) && currHour < formatHour(endHour) ){
+  if(dayOfWeek === day && currHour >= formatHour(startHour) && currHour < formatHour(endHour) ){
     return true;
   }
   return false;
@@ -93,7 +93,7 @@ const isTimeRangeCurrent = (timeRange) => {
 
 
 const getSessionTiming = (session) => {
-  const currSession = sessions?.find(s => s?.session == session);
+  const currSession = sessions?.find(s => s?.session === session);
   return `${currSession?.timing}`;
 }
 

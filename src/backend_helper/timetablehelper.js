@@ -49,7 +49,7 @@ export const getTimeTableHelper = async () => {
             },
             body: JSON.stringify(requestBody)
           });
-        const data = response.json();
+        const data = await response.json();
         
         
     }catch(err){
@@ -68,12 +68,12 @@ export const getTimeTableHelper = async () => {
             'Content-Type': 'application/json'
           }
         });
-      const data = response.json();
+      const data = await response.json();
       
       console.log(data);
   }catch(err){
       console.log(err);
-      alert("failed!");
+      
 
   }
   }

@@ -1,6 +1,6 @@
 import EmailIcon from '@mui/icons-material/Email';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { Box, Button, Checkbox, CircularProgress, FormControlLabel, FormGroup, InputAdornment, TextField } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleLogin } from '../../backend_helper';
@@ -69,7 +69,9 @@ function LoginComponent() {
             width:"100%"
         }}>
         <div className='login_title'>
-            <h1>Login to your Account</h1>
+            <Typography variant='h6' sx={{
+                fontFamily:'Arial'
+            }}>Login to your Account</Typography>
         </div>
         <form>
         <TextField
@@ -123,25 +125,30 @@ function LoginComponent() {
     loggingIn ? (
         <CircularProgress />
     ):(
-        <Button fullWidth color='info' variant='contained' disabled={(loginData.email.length == 0 || loginData.password.length==0)  ? true : false}  onClick={()=>{
+        <Button fullWidth color='info' variant='contained' disabled={(loginData.email.length===0 || loginData.password.length==0)  ? true : false}  onClick={()=>{
             console.log(loginData);
             setLoggingIn(true);
             handleLogin({email:loginData.email,password:loginData.password,rememberme:loginData.rememberme})
               .then(data=>{
                   console.log(data);
-                  if(data.message == "Logged In successfully!"){
+                  if(data.message==="Logged In successfully!"){
                       setLoggingIn(false);
                       invokeStateUpdate(true);
                       navigate("/dashboard");
                   }else{
                       setLoggingIn(false);
-          
-                      triggerNotification(data.message);
+                      console.log(data);
+                      if(typeof data.message === 'string'){
+                        triggerNotification(data.message);
+                      }else{
+                        triggerNotification('something went wrong!')
+                      }
+                     
                   }
               })
               .catch(err=>{
                   setLoggingIn(false);
-                  triggerNotification("error logging in ..",err)
+                  triggerNotification("error logging in ..")
               });
           }}>
               Login

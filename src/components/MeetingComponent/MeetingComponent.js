@@ -58,7 +58,7 @@ export default function MeetingComponent() {
           onUserAvatarSetter:(userList)=>{
             userList.forEach(user => {
               
-              const currUser = usersDetails.find(u => u.id == user.userID);
+              const currUser = usersDetails.find(u => u.id === user.userID);
               
               user.setUserAvatar(currUser?.imageUrl)
               
