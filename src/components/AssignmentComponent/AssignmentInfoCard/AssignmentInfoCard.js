@@ -269,7 +269,7 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
 
                                 fileUploading ? <CircularProgress sx={{ textAlign: 'center' }} /> : (
 
-
+                                    new Date(assignmentInfo.dueDateTime) > new Date() ? 
                                     <Box
                                         sx={{
                                             border: '1px dashed grey',
@@ -301,6 +301,10 @@ export default function AssignmentInfoCard({ assignmentInfo, invokeStateUpdate, 
                                             <AttachFileIcon color='info' />
                                             <input type="file" ref={fileInputRef} hidden onChange={uploadAssignmentToS3} />
                                         </IconButton>
+                                    </Box> : <Box sx={{
+                                        width:'100%'
+                                    }}>
+                                        <Typography variant='body1' color='red' textAlign='center'>You failed to submit assignment on time!</Typography>
                                     </Box>
 
                                 )

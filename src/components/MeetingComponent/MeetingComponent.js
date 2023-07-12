@@ -28,7 +28,7 @@ export default function MeetingComponent() {
       const userID = loggedInUser?.id;
       const navigate = useNavigate();
      let myMeeting = async (element) => {
-     const AppID = 71715708;
+     const AppID = 894758027;
      console.log(AppID);
     const serverSecret = process.env.REACT_APP_ZEGO_SECRET;
       

@@ -125,7 +125,7 @@ function RegisterComponent() {
         })
             .then((response) => {
 
-
+                console.log(response);
                 if (response.ok) {
 
                     triggerNotification("Registerd successfully!,Please confirm your email..");
@@ -139,12 +139,13 @@ function RegisterComponent() {
                         triggerNotification(errorMessage);
                     });
                 }
+                setRegistering(false);
 
             })
             .catch(function (error) {
                 console.log(error);
                 setRegistering(false);
-                triggerNotification(error);
+                triggerNotification("something went wrong!, try again!");
             });
     }
 
@@ -201,7 +202,7 @@ function RegisterComponent() {
 
     useEffect(() => {
         getAvailableClassesAndSubjects();
-    })
+    },[])
 
 
 

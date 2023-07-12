@@ -117,8 +117,8 @@ const getSessionTiming = (session) => {
             fontFamily:'Arial'
         }}>{day}</Typography>
         
-      {
-        screenWidth ?  
+        { content && content.length > 0 ? 
+       ( screenWidth ?  
         <Table aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -235,6 +235,8 @@ const getSessionTiming = (session) => {
         ))}
       </CardContent>
     </Card>
+      )):(
+        <Typography variant='body1' color='GrayText' textAlign='center'>Classes not assigned contact Admin</Typography>
       )
       }
     </TableContainer>
