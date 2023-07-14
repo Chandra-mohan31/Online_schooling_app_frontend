@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { getHandlingSubjects } from '../../backend_helper';
 import { fileUploadHelper } from '../../backend_helper/imageuploadhelper';
@@ -8,6 +8,9 @@ import { AuthContext } from '../../context/authContext';
 import { useModal } from '../../utils/useModal';
 import GeneralModal from '../GenerelModal/GeneralModal';
 import MaterialPreviewCard from './MaterialPreviewCard';
+import debounce from 'lodash.debounce';
+import {  Clear, Search } from '@mui/icons-material';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,6 +35,7 @@ function StudyMaterialsTeacher() {
     const [chosenFile, setChosenFile] = useState();
 
     const [postedMaterials,setPostedMaterials] = useState([]);
+    const [materialsCache,setMaterialsCache] = useState([]);
     const [stUp,setStUp] = useState(false);
     const inStUp =() => {
         setStUp(!stUp);
@@ -45,7 +49,7 @@ function StudyMaterialsTeacher() {
         const data = await getPostedMaterialsTeacher(loggedInUser?.id);
         console.log(data);
         setPostedMaterials(data?.materials);
-
+        setMaterialsCache(data?.materials);
         }
     }
 
@@ -176,6 +180,43 @@ function StudyMaterialsTeacher() {
     }
 
 
+    const filterMaterials = (materials,titlePrefix) => {
+        const filteredMaterials = [];
+        console.log(materials);
+        for (const material of materials) {
+          const title = material?.materialTitle?.toLowerCase();
+          if (title.startsWith(titlePrefix.toLowerCase())) {
+            filteredMaterials.push(material);
+          }
+        }
+        console.log(filteredMaterials);
+        return filteredMaterials;
+      };
+      const [searchMaterialTitle,setSearchMaterialTitle] = useState('');
+    
+    
+    
+      const debouncedSearch = React.useCallback(
+        debounce(async (query,materials) => {
+          
+          if(query == ''){
+            setPostedMaterials(materials);
+          }else{
+            
+            setPostedMaterials(filterMaterials(materials,query));
+    
+            
+          }
+        }, 500), 
+        []
+      );
+    
+      const handleQueryChange = (e) => {
+          setSearchMaterialTitle(e.target.value);
+          debouncedSearch(e.target.value,materialsCache);
+          
+      }
+
 
 
     useEffect(() => {
@@ -188,10 +229,40 @@ function StudyMaterialsTeacher() {
 
     return (
         <Box>
-             <Typography variant='h5' textAlign='center' sx={{
+             
+    <Box sx={{
+      display:'grid',
+      placeItems:'center'
+    }}>
+    <Box sx={{
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center'
+    }}>
+    <Typography variant='h5' textAlign='center' sx={{
       margin:'10px',
       
     }}>Posted Study Materials</Typography>
+    <TextField
+                        label="search"
+                        name='search'
+                        onChange={handleQueryChange}
+                        variant="standard"
+                        color="info"
+                        type="text"
+                        value={searchMaterialTitle}
+                        fullWidth
+                        sx={{ m: 4 }}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><Search  /></InputAdornment>,
+                            endAdornment: <InputAdornment position='end'><IconButton onClick={()=>{
+                                setSearchMaterialTitle('');
+                                setPostedMaterials(materialsCache);
+                            }}><Clear /></IconButton></InputAdornment>
+                        }}
+                    />
+    </Box>
+    </Box>
             
             <Box sx={{
                 margin:'20px',

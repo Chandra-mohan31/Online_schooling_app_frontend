@@ -1,4 +1,4 @@
-import { Person } from '@mui/icons-material';
+import { Chat, Person } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SchoolIcon from '@mui/icons-material/School';
 import AppBar from '@mui/material/AppBar';
@@ -26,8 +26,9 @@ function NavbarComponent() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const pages =  isLoggedIn()  ? [{title:'dashboard',routeto:'/dashboard'},{title:'studymaterials',routeto:'/studymaterials'},{title:'assignments',routeto:'/assignments'}] :[{title:'Login',routeto:'/login'},{title:"Register",routeto:"/register"}];
-  const settings = [{title: 'Dashboard',routeto:'/dashboard'},{ title:'Profile',routeto:'/profile',icon:<Person />}, {title:'Logout'}];
   const {loggedInUser,invokeStateUpdate} = useContext(AuthContext);
+  
+  const settings = [{title: 'Dashboard',routeto:'/dashboard'},{ title:'Profile',routeto:'/profile',icon:<Person />},{ title:'Chat',routeto:`/chat/${loggedInUser?.id}`,icon:<Chat />}, {title:'Logout'}];
   const location = useLocation();
  
   const handleOpenNavMenu = (event) => {

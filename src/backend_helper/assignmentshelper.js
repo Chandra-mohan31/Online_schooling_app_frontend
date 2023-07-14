@@ -74,9 +74,9 @@ export const postAssignment = async (requestBody) => {
 
 
 
-export const getAssignmentsOfClass = async (className) =>{
+export const getAssignmentsOfClass = async (className,username) =>{
     try{
-        const response = await fetch(`${baseURL}/classAssignments/${className}`);
+        const response = await fetch(`${baseURL}/classAssignments/${className}?username=${username}`);
         const data = await response.json();
         console.log(data);
         if(response.ok){

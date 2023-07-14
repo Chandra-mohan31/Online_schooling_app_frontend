@@ -236,7 +236,9 @@ const getSessionTiming = (session) => {
       </CardContent>
     </Card>
       )):(
-        <Typography variant='body1' color='GrayText' textAlign='center'>Classes not assigned contact Admin</Typography>
+        <Typography variant='body1' color='GrayText' textAlign='center' sx={{
+          padding:'30px'
+        }}>Classes not assigned contact Admin</Typography>
       )
       }
     </TableContainer>

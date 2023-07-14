@@ -18,6 +18,7 @@ import ViewAssignmentSubmissions from './components/ViewAssignmentSubmissions/Vi
 import { GlobalAuthStateProvider } from './context/authContext';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import ChatComponent from './components/ChatComponent/ChatComponent';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +76,17 @@ const router = createBrowserRouter([
       
         <NavbarComponent />
         <ProfileComponent />
+      </Protected>
+    )
+  },
+  {
+    path: "/chat/:userId",
+    element: (
+      <Protected>
+      
+      
+        <NavbarComponent />
+        <ChatComponent />
       </Protected>
     )
   },
